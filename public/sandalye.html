@@ -1,42 +1,48 @@
 <!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="/css/style.css"><title>Sandalye | Etlik Şehir Hastanesi</title></head><body>
-<header class="top"><div class="logo"><img src="/img/logo.svg" width="26" height="26" alt=""></div><h1>Etlik Şehir Hastanesi<small>Tekerlekli Sandalye Emanet Sistemi</small></h1></header>
-<main>
-  <div id="banner" class="banner"></div>
-  <div class="steps" id="steps"></div>
-  <div class="card" id="chairCard"><p class="muted">Sandalye bilgisi yükleniyor…</p></div>
-  <div id="msg"></div>
+<a class="skip" href="#main">Ana içeriğe geç</a>
+<header class="top"><div class="logo"><img src="/img/logo.svg" width="26" height="26" alt=""></div><h1>Etlik Şehir Hastanesi<small>Tekerlekli Sandalye Hizmeti</small></h1></header>
+<main id="main" tabindex="-1">
+  <div id="banner" class="banner" role="status" aria-live="polite"></div>
+  <div class="steps hidden" id="steps"></div>
+  <div class="card" id="chairCard" aria-busy="true"><p class="muted">Sandalye bilgisi yükleniyor…</p></div>
+  <div id="msg" role="alert"></div>
 
   <form class="card hidden" id="borrowForm" novalidate>
-    <h2>Bilgilerinizi yazın</h2><p class="muted">Bilgileriniz yalnızca bu sandalyenin takibi için kullanılır.</p>
-    <label class="f" for="fullName">Ad Soyad *</label><input type="text" id="fullName" autocomplete="name" required>
+    <h2>Bilgilerinizi yazın</h2>
+    <p class="muted">5 kısa bilgi yeterli. Bilgileriniz yalnızca bu sandalyenin takibi için kullanılır. <b>*</b> ile işaretli alanlar zorunludur.</p>
+    <label class="f" for="fullName">Adınız ve soyadınız *</label>
+    <input type="text" id="fullName" autocomplete="name" required aria-describedby="fullName-err"><div class="field-err" id="fullName-err"></div>
     <div class="row2">
-      <div><label class="f" for="tc">T.C. Kimlik No *</label><input type="tel" id="tc" inputmode="numeric" maxlength="11" required></div>
-      <div><label class="f" for="phone">Telefon Numarası *</label><input type="tel" id="phone" inputmode="tel" placeholder="05XX XXX XX XX" autocomplete="tel" required></div>
+      <div><label class="f" for="tc">T.C. Kimlik Numaranız (11 hane) *</label><input type="tel" id="tc" inputmode="numeric" maxlength="11" required aria-describedby="tc-hint tc-err"><small class="muted" id="tc-hint">Sandalye geri gelmezse size ulaşmak için.</small><div class="field-err" id="tc-err"></div></div>
+      <div><label class="f" for="phone">Telefon numaranız *</label><input type="tel" id="phone" inputmode="tel" autocomplete="tel-national" required aria-describedby="phone-hint phone-err"><small class="muted" id="phone-hint">Örnek: 0532 123 45 67</small><div class="field-err" id="phone-err"></div></div>
     </div>
-    <label class="f" for="fromHospital">Geldiği Hastane *</label><select id="fromHospital" required></select>
-    <label class="f" for="fromDepartment">Geldiği Bölüm / Poliklinik / Servis *</label><input type="text" id="fromDepartment" placeholder="Örn: Kardiyoloji Polikliniği" required>
+    <label class="f" for="fromHospital">Hangi hastaneden geldiniz? *</label>
+    <select id="fromHospital" required aria-describedby="fromHospital-err"></select><div class="field-err" id="fromHospital-err"></div>
+    <label class="f" for="fromDepartment">Hangi bölüme gidiyordunuz? *</label>
+    <input type="text" id="fromDepartment" placeholder="Örn: Kardiyoloji" required aria-describedby="fromDepartment-err"><div class="field-err" id="fromDepartment-err"></div>
     <div id="faultBorrow"></div>
     <div class="kvkk">
-      <p style="margin:0 0 8px">Kişisel verileriniz yalnızca sandalye emanet takibi için işlenir. <a href="#" data-kvkk>KVKK Aydınlatma Metni'ni okuyun</a>.</p>
-      <label class="chk"><input type="checkbox" id="kvkkOk" required>KVKK Aydınlatma Metni'ni okudum, anladım ve onaylıyorum. *</label>
+      <label class="chk"><input type="checkbox" id="kvkkOk" aria-describedby="kvkk-err">Bilgilerimin yalnızca sandalye takibi için kullanılmasını kabul ediyorum. *</label>
+      <button type="button" class="linklike" data-kvkk>Ayrıntıyı oku (KVKK Aydınlatma Metni)</button>
+      <div class="field-err" id="kvkk-err"></div>
     </div>
-    <div id="formMsg"></div>
-    <button class="btn lg block" style="margin-top:14px" id="borrowBtn" disabled>Tamam, Gönder</button>
-    <p class="muted" style="text-align:center">Gönderdikten sonra bir görevliye gidip onay alın.</p>
+    <div id="formMsg" role="alert"></div>
+    <button class="btn lg block" style="margin-top:14px" id="borrowBtn">Kaydet ve görevliye git</button>
+    <p class="muted" style="text-align:center">Kaydettikten sonra bir görevliye gidip onay alın.</p>
   </form>
 
   <form class="card hidden" id="returnForm" novalidate>
-    <h2>Bırakmadan önce son bir soru</h2>
+    <h2>Sandalyeyi bırakmadan önce 1 soru</h2>
     <div id="faultReturn"></div>
     <label class="f" for="returnNote">Not (isteğe bağlı)</label>
-    <textarea id="returnNote" maxlength="500" placeholder="Örn: Ana giriş danışmasına bıraktım"></textarea>
-    <div id="returnMsg"></div>
-    <button class="btn lg block" style="margin-top:14px">Sandalyeyi Bıraktım, Gönder</button>
+    <textarea id="returnNote" maxlength="500" placeholder="Örn: Ana giriş danışmasına bırakacağım"></textarea>
+    <div id="returnMsg" role="alert"></div>
+    <button class="btn lg block" style="margin-top:14px">Tamam, Gönder</button>
   </form>
 
-  <div class="card hidden" id="done"></div>
+  <div class="card hidden" id="done" aria-live="polite"></div>
 </main>
-<dialog id="kvkkDlg"><div class="dh">KVKK Aydınlatma Metni</div><div class="db" id="kvkkBody">Yükleniyor…</div>
+<dialog id="kvkkDlg" aria-labelledby="kvkkTitle"><h2 class="dh" id="kvkkTitle">KVKK Aydınlatma Metni</h2><div class="db" id="kvkkBody">Yükleniyor…</div>
   <div class="df"><button class="btn ghost" data-close>Kapat</button><button class="btn" id="kvkkAccept">Okudum, Onaylıyorum</button></div></dialog>
 <script src="/js/common.js"></script><script src="/js/fault-picker.js"></script><script src="/js/sandalye.js"></script>
 </body></html>

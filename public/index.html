@@ -1,16 +1,19 @@
 <!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="/css/style.css"><title>Tekerlekli Sandalye | Etlik Şehir Hastanesi</title></head><body>
+<a class="skip" href="#main">Ana içeriğe geç</a>
 <header class="top"><div class="logo"><img src="/img/logo.svg" width="26" height="26" alt=""></div><h1>Etlik Şehir Hastanesi<small>Tekerlekli Sandalye Hizmeti</small></h1><div class="right"><a href="/giris" style="color:#fff">Personel Girişi</a></div></header>
-<main>
+<main id="main" tabindex="-1">
   <section class="hero">
     <h2>Tekerlekli sandalye mi lazım?</h2>
-    <p>Sandalyenin üzerindeki <b>QR kodu</b> telefonunuzun kamerasıyla okutun. Gerisini ekran size adım adım söyler.</p>
-    <button class="btn lg block" id="scanBtn">📷 QR Kodu Okut</button>
-    <div id="reader" class="hidden" style="margin-top:12px"></div>
-    <div id="msg"></div>
+    <p>Sandalyeyi alırken de geri bırakırken de önce sandalyenin üzerindeki <b>QR kodu</b> telefon kameranızla okutun. <b>Ne yapacağınızı ekran kendisi söyler.</b></p>
+    <button class="btn lg block" id="scanBtn"><span aria-hidden="true">📷</span> QR Kodu Okut</button>
+    <div id="reader" class="hidden" style="margin-top:12px" role="region" aria-label="Kamera görüntüsü, QR kod aranıyor"></div>
+    <button class="btn ghost block hidden" id="stopBtn" style="margin-top:8px">Kamerayı kapat</button>
+    <div id="msg" role="alert"></div>
     <label class="f" for="manual">QR okutamıyor musunuz? Sandalyenin üstündeki numarayı yazın</label>
-    <div style="display:flex;gap:8px"><input type="text" id="manual" placeholder="Örn: TS-0001" autocapitalize="characters"><button class="btn navy" id="goBtn">Devam</button></div>
+    <div style="display:flex;gap:8px"><input type="text" id="manual" placeholder="Örn: TS-0001" autocapitalize="characters" autocomplete="off" spellcheck="false"><button class="btn navy" id="goBtn">Devam</button></div>
   </section>
 
+  <h2 class="sr-only">Okuttuktan sonra ne göreceksiniz?</h2>
   <div class="modes">
     <section class="mode take">
       <div class="mode-head"><span class="tag">ALMAK İÇİN</span><h3>Sandalyeyi ben alıyorum</h3></div>

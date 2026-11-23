@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Etlik ŞH Sandalye Demo</title><meta name="color-scheme" content="light"><style>:root {
-  --navy: #12355b; --teal: #0e8a8a; --teal-l: #e3f4f4; --bg: #f4f6f9; --card: #fff; --ink: #1d2733; --muted: #66727f;
-  --line: #dde3ea; --ok: #1f8a4c; --ok-l: #e4f5eb; --warn: #b7791f; --warn-l: #fdf3e1; --bad: #c0392b; --bad-l: #fbe9e7;
+  --navy: #12355b; --teal: #0b6f6f; --line-ui: #7d8996; --teal-l: #e3f4f4; --bg: #f4f6f9; --card: #fff; --ink: #1d2733; --muted: #556270;
+  --line: #dde3ea; --ok: #17693a; --ok-l: #e4f5eb; --warn: #8a5a0b; --warn-l: #fdf3e1; --bad: #c0392b; --bad-l: #fbe9e7;
   --info: #2b6cb0; --info-l: #e6f0fa; --wait: #7b4bb7; --wait-l: #f1eafa; --r: 14px;
 }
 * { box-sizing: border-box; }
@@ -11,21 +11,21 @@ a { color: var(--teal); }
 header.top { background: var(--navy); color: #fff; padding: 12px 16px; display: flex; align-items: center; gap: 12px; }
 header.top .logo { width: 38px; height: 38px; border-radius: 10px; background: #fff; display: grid; place-items: center; flex: none; }
 header.top h1 { font-size: 17px; margin: 0; line-height: 1.2; }
-header.top small { display: block; opacity: .8; font-weight: 400; font-size: 13px; }
+header.top small { display: block; color: #dbe6f2; font-weight: 400; font-size: 13px; }
 header.top .right { margin-left: auto; display: flex; gap: 8px; align-items: center; font-size: 14px; }
 main { max-width: 760px; margin: 0 auto; padding: 16px; }
 main.wide { max-width: 1240px; }
 .card { background: var(--card); border-radius: var(--r); padding: 16px; box-shadow: 0 1px 3px rgba(18,53,91,.08); margin-bottom: 14px; }
 .card h2 { font-size: 18px; margin: 0 0 12px; }
-.muted { color: var(--muted); font-size: 14px; }
+.muted { color: var(--muted); font-size: 15px; }
 .hidden { display: none !important; }
 
 /* Adım infografiği */
 .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 14px; }
-.step { background: var(--card); border-radius: 12px; padding: 10px 6px; text-align: center; font-size: 12.5px; font-weight: 600; color: var(--muted); position: relative; border: 2px solid transparent; }
+.step { background: var(--card); border-radius: 12px; padding: 10px 6px; text-align: center; font-size: 14px; overflow-wrap: anywhere; font-weight: 600; color: var(--muted); position: relative; border: 2px solid transparent; }
 .step .ic { width: 38px; height: 38px; margin: 0 auto 6px; border-radius: 50%; display: grid; place-items: center; background: var(--bg); }
 .step .ic svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.step .n { position: absolute; top: 6px; left: 8px; font-size: 11px; opacity: .7; }
+.step .n { position: absolute; top: 6px; left: 8px; font-size: 12px; }
 .step.done { color: var(--ok); } .step.done .ic { background: var(--ok-l); }
 .step.active { color: var(--teal); border-color: var(--teal); } .step.active .ic { background: var(--teal-l); }
 @media (min-width: 600px) { .step { font-size: 14px; } }
@@ -42,14 +42,14 @@ main.wide { max-width: 1240px; }
 /* Form */
 label.f { display: block; font-weight: 600; font-size: 14px; margin: 12px 0 5px; }
 input[type=text], input[type=tel], input[type=password], input[type=search], input[type=date], select, textarea {
-  width: 100%; padding: 12px; font-size: 16px; border: 1.5px solid var(--line); border-radius: 10px; background: #fff; color: var(--ink); font-family: inherit; }
-input:focus, select:focus, textarea:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px var(--teal-l); }
+  width: 100%; padding: 12px; font-size: 16px; border: 1.5px solid var(--line-ui); border-radius: 10px; background: #fff; color: var(--ink); font-family: inherit; }
+input:focus, select:focus, textarea:focus { outline: 3px solid var(--navy); outline-offset: 1px; border-color: var(--navy); }
 textarea { min-height: 70px; resize: vertical; }
 .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 @media (max-width: 520px) { .row2 { grid-template-columns: 1fr; } }
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 0; border-radius: 12px; padding: 13px 18px;
+.btn { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 0; border-radius: 12px; padding: 13px 18px;
   font-size: 16px; font-weight: 700; cursor: pointer; background: var(--teal); color: #fff; text-decoration: none; font-family: inherit; }
-.btn:disabled { opacity: .45; cursor: not-allowed; }
+.btn:disabled { opacity: .6; cursor: not-allowed; }
 .btn.block { width: 100%; }
 .btn.lg { padding: 16px 20px; font-size: 18px; }
 .btn.sec { background: var(--teal-l); color: var(--teal); }
@@ -59,16 +59,15 @@ textarea { min-height: 70px; resize: vertical; }
 
 /* Arıza seçimi */
 .choice { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.choice label { border: 2px solid var(--line); border-radius: 12px; padding: 14px; text-align: center; font-weight: 700; cursor: pointer; background: #fff; }
-.choice input { position: absolute; opacity: 0; pointer-events: none; }
+.choice label { border: 2px solid var(--line-ui); border-radius: 12px; padding: 14px; text-align: center; font-weight: 700; cursor: pointer; background: #fff; }
+.choice input, .parts input { position: absolute; opacity: 0; width: 1px; height: 1px; }
 .choice label.on-ok { border-color: var(--ok); background: var(--ok-l); color: var(--ok); }
 .choice label.on-bad { border-color: var(--bad); background: var(--bad-l); color: var(--bad); }
 .parts { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; margin-top: 12px; }
-.parts label { border: 2px solid var(--line); border-radius: 12px; padding: 10px 6px; text-align: center; cursor: pointer; font-weight: 600; font-size: 14px; background: #fff; }
+.parts label { border: 2px solid var(--line-ui); border-radius: 12px; padding: 10px 6px; text-align: center; cursor: pointer; font-weight: 600; font-size: 14px; background: #fff; }
 .parts label svg { width: 30px; height: 30px; display: block; margin: 0 auto 4px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.parts input { position: absolute; opacity: 0; pointer-events: none; }
 .parts label.on { border-color: var(--bad); color: var(--bad); background: var(--bad-l); }
-.parts small { display: block; font-weight: 400; font-size: 11.5px; color: var(--muted); }
+.parts small { display: block; font-weight: 400; font-size: 13px; color: var(--muted); }
 
 /* KVKK */
 .kvkk { border: 1.5px dashed var(--teal); background: var(--teal-l); border-radius: 12px; padding: 12px; margin-top: 16px; }
@@ -80,7 +79,7 @@ dialog .dh { padding: 14px 16px; background: var(--navy); color: #fff; font-weig
 dialog .db { padding: 16px; overflow: auto; max-height: calc(88vh - 120px); font-size: 14.5px; }
 dialog .df { padding: 12px 16px; border-top: 1px solid var(--line); display: flex; gap: 8px; justify-content: flex-end; }
 
-.alert { border-radius: 12px; padding: 12px 14px; margin: 10px 0; font-size: 15px; }
+.alert { border-left: 6px solid currentColor; border-radius: 12px; padding: 12px 14px; margin: 10px 0; font-size: 15px; }
 .alert.err { background: var(--bad-l); color: var(--bad); } .alert.ok { background: var(--ok-l); color: var(--ok); }
 .alert.info { background: var(--info-l); color: var(--info); } .alert.warn { background: var(--warn-l); color: var(--warn); }
 .big-ok { text-align: center; padding: 20px 10px; }
@@ -145,10 +144,41 @@ table.t th { background: var(--bg); position: sticky; top: 0; font-size: 13px; }
 .help { font-size: 15px; }
 .banner { border-radius: var(--r); padding: 16px; margin-bottom: 14px; color: #fff; display: grid; gap: 4px; }
 .banner:empty { display: none; }
-.banner b { font-size: 22px; line-height: 1.2; }
-.banner span { font-size: 15.5px; opacity: .95; }
+.banner .bt, .banner b { font-size: 22px; line-height: 1.2; }
+.banner span { font-size: 16px; }
 .banner.take { background: var(--teal); } .banner.give { background: var(--warn); }
 .banner.wait { background: var(--wait); } .banner.bad { background: var(--bad); }
+
+/* Erişilebilirlik */
+:focus-visible { outline: 3px solid var(--navy); outline-offset: 3px; border-radius: 6px; }
+.btn:focus-visible { box-shadow: 0 0 0 6px #fff; }
+header.top :focus-visible { outline-color: #fff; }
+a { text-decoration: underline; text-underline-offset: 3px; }
+header.top .right a { display: inline-flex; min-height: 44px; align-items: center; padding: 0 8px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip { position: absolute; left: -999px; } .skip:focus { left: 8px; top: 8px; background: #fff; padding: 12px; z-index: 9; }
+.linklike { background: none; border: 0; padding: 10px 0; color: var(--teal); text-decoration: underline; font: inherit; cursor: pointer; min-height: 44px; }
+fieldset { border: 0; padding: 0; margin: 0; min-width: 0; } legend.f { padding: 0; }
+.field-err { color: var(--bad); font-weight: 600; font-size: 14.5px; margin-top: 4px; } .field-err:empty { display: none; }
+input[aria-invalid="true"], select[aria-invalid="true"] { border-color: var(--bad); border-width: 2.5px; }
+.choice label:focus-within, .parts label:focus-within { outline: 3px solid var(--navy); outline-offset: 2px; }
+.choice label.on-ok::before { content: "✓ "; } .choice label.on-bad::before { content: "! "; }
+.parts label.on::after { content: " ✓"; font-weight: 800; }
+.req-note { font-size: 14.5px; margin: 0 0 4px; }
+ol.flow { list-style: none; padding: 0; margin: 0 0 10px; }
+@media (max-width: 420px) { .steps { grid-template-columns: repeat(2, 1fr); } .flow { flex-direction: column; gap: 10px; } .flow .arrow { display: none; } }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; animation: none !important; transition: none !important; } }
+
+/* Hasta ekranı: bitiş ve banner yön rozeti */
+.banner { grid-template-columns: 56px 1fr; align-items: center; column-gap: 12px; }
+.banner::before { content: "↗"; font-size: 36px; font-weight: 900; background: rgba(255,255,255,.22); border-radius: 14px; width: 56px; height: 56px; display: grid; place-items: center; grid-row: 1 / 3; }
+.banner.give::before { content: "↙"; } .banner.wait::before { content: "…"; } .banner.bad::before { content: "✕"; }
+.banner .bt { margin: 0; font-size: 22px; line-height: 1.2; }
+.big-ok .ic.wait { background: var(--info-l); color: var(--info); }
+.next { background: var(--teal-l); border-radius: 12px; padding: 12px; font-size: 18px; margin-top: 12px; text-align: left; }
+.stop { background: var(--bad-l); color: #8f2a1f; border: 2px solid var(--bad); border-radius: 12px; padding: 12px; font-size: 18px; font-weight: 800; margin-top: 12px; text-align: left; }
+body { font-size: 17px; } label.f { font-size: 16.5px; } .flow .fl { font-size: 15px; }
+.linklike:focus-visible { outline: 3px solid var(--navy); }
 /* A4: 3 sütun x 7 satır = 21 etiket (70 x 42 mm) */
 #sheet { padding: 10px; }
 .page { width: 210mm; height: 297mm; padding: 4.5mm 0; margin: 0 auto 10px; background: #fff; display: grid;
@@ -2505,29 +2535,35 @@ var qrcode = function() {
 </script>
 <script>
 const KVKK_HTML = "<!-- Bu metin hastanenin KVKK birimi / hukuk m\u00fc\u015faviri taraf\u0131ndan g\u00f6zden ge\u00e7irilmelidir.\n     Metni de\u011fi\u015ftirdi\u011finizde src/config.js i\u00e7indeki KVKK_VERSION de\u011ferini art\u0131r\u0131n. -->\n<p><b>Ankara Etlik \u015eehir Hastanesi</b><br>Tekerlekli Sandalye Emanet Hizmeti Ki\u015fisel Verilerin Korunmas\u0131 Ayd\u0131nlatma Metni (S\u00fcr\u00fcm v1.0-2026-11)</p>\n\n<p><b>1. Veri Sorumlusu.</b> 6698 say\u0131l\u0131 Ki\u015fisel Verilerin Korunmas\u0131 Kanunu (\"KVKK\") uyar\u0131nca ki\u015fisel verileriniz, veri sorumlusu s\u0131fat\u0131yla T.C. Sa\u011fl\u0131k Bakanl\u0131\u011f\u0131 Ankara Etlik \u015eehir Hastanesi taraf\u0131ndan a\u015fa\u011f\u0131da a\u00e7\u0131klanan kapsamda i\u015flenmektedir.</p>\n\n<p><b>2. \u0130\u015flenen Ki\u015fisel Veriler.</b> Ad soyad, T.C. kimlik numaras\u0131, telefon numaras\u0131, geldi\u011finiz hastane ve b\u00f6l\u00fcm/poliklinik/servis bilgisi, \u00f6d\u00fcn\u00e7 ald\u0131\u011f\u0131n\u0131z sandalyenin numaras\u0131, teslim ve iade zamanlar\u0131, sandalyenin fiziki durumuna ili\u015fkin beyan\u0131n\u0131z ve i\u015flem s\u0131ras\u0131nda kaydedilen IP adresi.</p>\n\n<p><b>3. \u0130\u015fleme Ama\u00e7lar\u0131.</b> Hastane demirba\u015f\u0131 olan tekerlekli sandalyenin size emanet olarak teslim edilmesi, iadesinin takibi, kay\u0131p ve hasar\u0131n \u00f6nlenmesi, ar\u0131za ve bak\u0131m s\u00fcre\u00e7lerinin y\u00fcr\u00fct\u00fclmesi, hizmetin planlanmas\u0131 i\u00e7in istatistik \u00fcretilmesi ve gerekti\u011finde sizinle ileti\u015fime ge\u00e7ilmesi.</p>\n\n<p><b>4. Hukuki Sebep ve Toplama Y\u00f6ntemi.</b> Verileriniz, QR kod ile a\u00e7\u0131lan bu elektronik form arac\u0131l\u0131\u011f\u0131yla, KVKK m.5/2 (c) bir s\u00f6zle\u015fmenin kurulmas\u0131 veya ifas\u0131yla do\u011frudan ilgili olmas\u0131 (emanet ili\u015fkisi), (\u00e7) veri sorumlusunun hukuki y\u00fck\u00fcml\u00fcl\u00fc\u011f\u00fcn\u00fc yerine getirmesi (kamu mal\u0131n\u0131n korunmas\u0131) ve (f) temel hak ve \u00f6zg\u00fcrl\u00fcklerinize zarar vermemek kayd\u0131yla veri sorumlusunun me\u015fru menfaati hukuki sebeplerine dayan\u0131larak toplanmaktad\u0131r.</p>\n\n<p><b>5. Aktar\u0131m.</b> Verileriniz yaln\u0131zca yetkili hastane personeli taraf\u0131ndan g\u00f6r\u00fcnt\u00fclenir; kanunen yetkili kamu kurum ve kurulu\u015flar\u0131n\u0131n talebi halinde ilgili mevzuat \u00e7er\u00e7evesinde payla\u015f\u0131labilir. T.C. kimlik ve telefon numaran\u0131z sistemde \u015fifreli olarak saklan\u0131r ve personel ekran\u0131nda maskeli g\u00f6sterilir.</p>\n\n<p><b>6. Saklama S\u00fcresi.</b> Verileriniz emanet i\u015fleminin kapanmas\u0131ndan itibaren 1 (bir) y\u0131l s\u00fcreyle saklan\u0131r, s\u00fcre sonunda silinir, yok edilir veya anonim hale getirilir.</p>\n\n<p><b>7. Haklar\u0131n\u0131z.</b> KVKK m.11 uyar\u0131nca; verilerinizin i\u015flenip i\u015flenmedi\u011fini \u00f6\u011frenme, bilgi talep etme, i\u015fleme amac\u0131n\u0131 \u00f6\u011frenme, aktar\u0131ld\u0131\u011f\u0131 \u00fc\u00e7\u00fcnc\u00fc ki\u015fileri bilme, eksik/yanl\u0131\u015f i\u015flenmi\u015fse d\u00fczeltilmesini, silinmesini veya yok edilmesini isteme, otomatik sistemlerle analiz sonucu aleyhinize bir sonu\u00e7 \u00e7\u0131kmas\u0131na itiraz etme ve kanuna ayk\u0131r\u0131 i\u015fleme nedeniyle zarara u\u011framan\u0131z halinde zarar\u0131n giderilmesini talep etme haklar\u0131na sahipsiniz. Ba\u015fvurular\u0131n\u0131z\u0131 hastanenin KVKK ba\u015fvuru kanallar\u0131na (hasta haklar\u0131 birimi / kurumsal e-posta / KEP adresi) iletebilirsiniz.</p>\n";
-const TEMPLATES = {"index": "\n<header class=\"top\"><div class=\"logo\"><img src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMGU4YThhIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iOSIgY3k9IjE4IiByPSI0Ii8+PGNpcmNsZSBjeD0iMTgiIGN5PSIyMCIgcj0iMS41Ii8+PHBhdGggZD0iTTYgM2gybDEgOGg3bDIgNU05IDExVjdoNiIvPjwvc3ZnPgo=\" width=\"26\" height=\"26\" alt=\"\"></div><h1>Etlik Şehir Hastanesi<small>Tekerlekli Sandalye Hizmeti</small></h1><div class=\"right\"><a href=\"/giris\" style=\"color:#fff\">Personel Girişi</a></div></header>\n<main>\n  <section class=\"hero\">\n    <h2>Tekerlekli sandalye mi lazım?</h2>\n    <p>Sandalyenin üzerindeki <b>QR kodu</b> telefonunuzun kamerasıyla okutun. Gerisini ekran size adım adım söyler.</p>\n    <button class=\"btn lg block\" id=\"scanBtn\">📷 QR Kodu Okut</button>\n    <div id=\"reader\" class=\"hidden\" style=\"margin-top:12px\"></div>\n    <div id=\"msg\"></div>\n    <label class=\"f\" for=\"manual\">QR okutamıyor musunuz? Sandalyenin üstündeki numarayı yazın</label>\n    <div style=\"display:flex;gap:8px\"><input type=\"text\" id=\"manual\" placeholder=\"Örn: TS-0001\" autocapitalize=\"characters\"><button class=\"btn navy\" id=\"goBtn\">Devam</button></div>\n  </section>\n\n  <div class=\"modes\">\n    <section class=\"mode take\">\n      <div class=\"mode-head\"><span class=\"tag\">ALMAK İÇİN</span><h3>Sandalyeyi ben alıyorum</h3></div>\n      <div class=\"flow\" id=\"flowTake\"></div>\n      <p class=\"muted\">Görevli “onaylandı” demeden sandalyeyi götürmeyin.</p>\n    </section>\n    <section class=\"mode give\">\n      <div class=\"mode-head\"><span class=\"tag\">BIRAKMAK İÇİN</span><h3>Sandalyeyi geri bırakıyorum</h3></div>\n      <div class=\"flow\" id=\"flowGive\"></div>\n      <p class=\"muted\">Aynı sandalyenin QR kodunu okutmanız yeterli.</p>\n    </section>\n  </div>\n\n  <div class=\"card help\"><b>Yardım mı lazım?</b> Herhangi bir danışma noktasındaki görevliye başvurabilirsiniz. Bilgileriniz yalnızca sandalye takibi için kullanılır.</div>\n</main>\n", "sandalye": "\n<header class=\"top\"><div class=\"logo\"><img src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMGU4YThhIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iOSIgY3k9IjE4IiByPSI0Ii8+PGNpcmNsZSBjeD0iMTgiIGN5PSIyMCIgcj0iMS41Ii8+PHBhdGggZD0iTTYgM2gybDEgOGg3bDIgNU05IDExVjdoNiIvPjwvc3ZnPgo=\" width=\"26\" height=\"26\" alt=\"\"></div><h1>Etlik Şehir Hastanesi<small>Tekerlekli Sandalye Emanet Sistemi</small></h1></header>\n<main>\n  <div id=\"banner\" class=\"banner\"></div>\n  <div class=\"steps\" id=\"steps\"></div>\n  <div class=\"card\" id=\"chairCard\"><p class=\"muted\">Sandalye bilgisi yükleniyor…</p></div>\n  <div id=\"msg\"></div>\n\n  <form class=\"card hidden\" id=\"borrowForm\" novalidate>\n    <h2>Bilgilerinizi yazın</h2><p class=\"muted\">Bilgileriniz yalnızca bu sandalyenin takibi için kullanılır.</p>\n    <label class=\"f\" for=\"fullName\">Ad Soyad *</label><input type=\"text\" id=\"fullName\" autocomplete=\"name\" required>\n    <div class=\"row2\">\n      <div><label class=\"f\" for=\"tc\">T.C. Kimlik No *</label><input type=\"tel\" id=\"tc\" inputmode=\"numeric\" maxlength=\"11\" required></div>\n      <div><label class=\"f\" for=\"phone\">Telefon Numarası *</label><input type=\"tel\" id=\"phone\" inputmode=\"tel\" placeholder=\"05XX XXX XX XX\" autocomplete=\"tel\" required></div>\n    </div>\n    <label class=\"f\" for=\"fromHospital\">Geldiği Hastane *</label><select id=\"fromHospital\" required></select>\n    <label class=\"f\" for=\"fromDepartment\">Geldiği Bölüm / Poliklinik / Servis *</label><input type=\"text\" id=\"fromDepartment\" placeholder=\"Örn: Kardiyoloji Polikliniği\" required>\n    <div id=\"faultBorrow\"></div>\n    <div class=\"kvkk\">\n      <p style=\"margin:0 0 8px\">Kişisel verileriniz yalnızca sandalye emanet takibi için işlenir. <a href=\"#\" data-kvkk>KVKK Aydınlatma Metni'ni okuyun</a>.</p>\n      <label class=\"chk\"><input type=\"checkbox\" id=\"kvkkOk\" required>KVKK Aydınlatma Metni'ni okudum, anladım ve onaylıyorum. *</label>\n    </div>\n    <div id=\"formMsg\"></div>\n    <button class=\"btn lg block\" style=\"margin-top:14px\" id=\"borrowBtn\" disabled>Tamam, Gönder</button>\n    <p class=\"muted\" style=\"text-align:center\">Gönderdikten sonra bir görevliye gidip onay alın.</p>\n  </form>\n\n  <form class=\"card hidden\" id=\"returnForm\" novalidate>\n    <h2>Bırakmadan önce son bir soru</h2>\n    <div id=\"faultReturn\"></div>\n    <label class=\"f\" for=\"returnNote\">Not (isteğe bağlı)</label>\n    <textarea id=\"returnNote\" maxlength=\"500\" placeholder=\"Örn: Ana giriş danışmasına bıraktım\"></textarea>\n    <div id=\"returnMsg\"></div>\n    <button class=\"btn lg block\" style=\"margin-top:14px\">Sandalyeyi Bıraktım, Gönder</button>\n  </form>\n\n  <div class=\"card hidden\" id=\"done\"></div>\n</main>\n<dialog id=\"kvkkDlg\"><div class=\"dh\">KVKK Aydınlatma Metni</div><div class=\"db\" id=\"kvkkBody\">Yükleniyor…</div>\n  <div class=\"df\"><button class=\"btn ghost\" data-close>Kapat</button><button class=\"btn\" id=\"kvkkAccept\">Okudum, Onaylıyorum</button></div></dialog>\n", "giris": "\n<header class=\"top\"><div class=\"logo\"><img src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMGU4YThhIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iOSIgY3k9IjE4IiByPSI0Ii8+PGNpcmNsZSBjeD0iMTgiIGN5PSIyMCIgcj0iMS41Ii8+PHBhdGggZD0iTTYgM2gybDEgOGg3bDIgNU05IDExVjdoNiIvPjwvc3ZnPgo=\" width=\"26\" height=\"26\" alt=\"\"></div><h1>Etlik Şehir Hastanesi<small>Tekerlekli Sandalye Emanet Sistemi</small></h1></header>\n<main><form class=\"card login\" id=\"f\"><h2>Personel / Süpervizör Girişi</h2>\n  <label class=\"f\" for=\"u\">Kullanıcı adı</label><input type=\"text\" id=\"u\" autocomplete=\"username\" autocapitalize=\"none\" required>\n  <label class=\"f\" for=\"p\">Şifre</label><input type=\"password\" id=\"p\" autocomplete=\"current-password\" required>\n  <div id=\"msg\"></div><button class=\"btn block lg\" style=\"margin-top:14px\">Giriş Yap</button></form>\n<div class=\"card login demo-users\"><h2>Demo kullanıcıları</h2><p class=\"muted\">Şifre hepsinde: <b>demo1234</b></p>\n<dl class=\"kv\"><dt>admin</dt><dd>Admin: her şey</dd><dt>supervizor1</dt><dd>Süpervizör: tüm kampüs</dd>\n<dt>kalp.personel</dt><dd>Personel: yalnızca Kalp Damar</dd></dl></div></main>\n", "personel": "\n<header class=\"top\"><div class=\"logo\"><img src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMGU4YThhIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iOSIgY3k9IjE4IiByPSI0Ii8+PGNpcmNsZSBjeD0iMTgiIGN5PSIyMCIgcj0iMS41Ii8+PHBhdGggZD0iTTYgM2gybDEgOGg3bDIgNU05IDExVjdoNiIvPjwvc3ZnPgo=\" width=\"26\" height=\"26\" alt=\"\"></div><h1>Etlik Şehir Hastanesi<small>Tekerlekli Sandalye Emanet Sistemi</small></h1><div class=\"right\"><span id=\"who\"></span><a href=\"/admin\" id=\"adminLink\" class=\"hidden\" style=\"color:#fff\">Admin</a><button class=\"btn sm sec\" id=\"logout\">Çıkış</button></div></header>\n<main class=\"wide\">\n  <div class=\"stats\" id=\"stats\"></div>\n  <div class=\"tabs\"><button data-tab=\"queue\" class=\"on\">Onay Bekleyenler <span id=\"qn\"></span></button><button data-tab=\"active\">Kullanımdakiler <span id=\"an\"></span></button></div>\n  <div class=\"card\"><div class=\"toolbar\"><input type=\"search\" id=\"filter\" placeholder=\"ID No veya ad ile filtrele\"><span class=\"muted\" id=\"refreshed\"></span></div>\n    <div id=\"list\"></div></div>\n</main>\n", "admin": "\n<header class=\"top\"><div class=\"logo\"><img src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMGU4YThhIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iOSIgY3k9IjE4IiByPSI0Ii8+PGNpcmNsZSBjeD0iMTgiIGN5PSIyMCIgcj0iMS41Ii8+PHBhdGggZD0iTTYgM2gybDEgOGg3bDIgNU05IDExVjdoNiIvPjwvc3ZnPgo=\" width=\"26\" height=\"26\" alt=\"\"></div><h1>Etlik Şehir Hastanesi<small>Tekerlekli Sandalye Emanet Sistemi</small></h1><div class=\"right\"><span id=\"who\"></span><a href=\"/personel\" style=\"color:#fff\">Personel Ekranı</a><button class=\"btn sm sec\" id=\"logout\">Çıkış</button></div></header>\n<main class=\"wide\">\n  <div class=\"tabs\" id=\"tabs\">\n    <button data-tab=\"ozet\" class=\"on\">Özet</button><button data-tab=\"sandalyeler\">Sandalyeler</button><button data-tab=\"yukle\">Excel Yükle</button>\n    <button data-tab=\"hareketler\">Hareketler</button><button data-tab=\"arizalar\">Arızalar</button><button data-tab=\"raporlar\">Raporlar</button>\n    <button data-tab=\"kullanicilar\">Kullanıcılar</button><a class=\"btn sm ghost\" href=\"/etiket\" target=\"_blank\">QR Etiket Yazdır ↗</a>\n  </div>\n  <div id=\"view\"></div>\n</main>\n<dialog id=\"dlg\"><div class=\"dh\" id=\"dlgTitle\"></div><div class=\"db\" id=\"dlgBody\"></div><div class=\"df\" id=\"dlgFoot\"></div></dialog>\n", "etiket": "\n<div class=\"noprint\"><header class=\"top\"><div class=\"logo\"><img src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMGU4YThhIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iOSIgY3k9IjE4IiByPSI0Ii8+PGNpcmNsZSBjeD0iMTgiIGN5PSIyMCIgcj0iMS41Ii8+PHBhdGggZD0iTTYgM2gybDEgOGg3bDIgNU05IDExVjdoNiIvPjwvc3ZnPgo=\" width=\"26\" height=\"26\" alt=\"\"></div><h1>Etlik Şehir Hastanesi<small>Tekerlekli Sandalye Emanet Sistemi</small></h1><div class=\"right\"><a href=\"/admin\" style=\"color:#fff\">Admin'e dön</a></div></header>\n<main class=\"wide\"><div class=\"card\"><h2>Toplu QR Etiket Çıktısı</h2>\n  <div class=\"toolbar\"><select id=\"hospital\"><option value=\"\">Tüm hastaneler</option></select>\n  <input type=\"text\" id=\"ids\" placeholder=\"İsteğe bağlı: TS-0001, TS-0002\"><button class=\"btn\" id=\"gen\">Etiketleri Oluştur</button>\n  <button class=\"btn navy\" id=\"print\" disabled>🖨 Yazdır</button></div>\n  <p class=\"muted\" id=\"info\">A4 sayfa başına 21 etiket (3×7). Yazdırırken \"Gerçek boyut / %100\" seçin, kenar boşluklarını \"Yok\" yapın.</p></div></main></div>\n<div id=\"sheet\"></div>\n"};
+const TEMPLATES = {"index": "\n<a class=\"skip\" href=\"#main\">Ana içeriğe geç</a>\n<header class=\"top\"><div class=\"logo\"><img src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMGU4YThhIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iOSIgY3k9IjE4IiByPSI0Ii8+PGNpcmNsZSBjeD0iMTgiIGN5PSIyMCIgcj0iMS41Ii8+PHBhdGggZD0iTTYgM2gybDEgOGg3bDIgNU05IDExVjdoNiIvPjwvc3ZnPgo=\" width=\"26\" height=\"26\" alt=\"\"></div><h1>Etlik Şehir Hastanesi<small>Tekerlekli Sandalye Hizmeti</small></h1><div class=\"right\"><a href=\"/giris\" style=\"color:#fff\">Personel Girişi</a></div></header>\n<main id=\"main\" tabindex=\"-1\">\n  <section class=\"hero\">\n    <h2>Tekerlekli sandalye mi lazım?</h2>\n    <p>Sandalyeyi alırken de geri bırakırken de önce sandalyenin üzerindeki <b>QR kodu</b> telefon kameranızla okutun. <b>Ne yapacağınızı ekran kendisi söyler.</b></p>\n    <button class=\"btn lg block\" id=\"scanBtn\"><span aria-hidden=\"true\">📷</span> QR Kodu Okut</button>\n    <div id=\"reader\" class=\"hidden\" style=\"margin-top:12px\" role=\"region\" aria-label=\"Kamera görüntüsü, QR kod aranıyor\"></div>\n    <button class=\"btn ghost block hidden\" id=\"stopBtn\" style=\"margin-top:8px\">Kamerayı kapat</button>\n    <div id=\"msg\" role=\"alert\"></div>\n    <label class=\"f\" for=\"manual\">QR okutamıyor musunuz? Sandalyenin üstündeki numarayı yazın</label>\n    <div style=\"display:flex;gap:8px\"><input type=\"text\" id=\"manual\" placeholder=\"Örn: TS-0001\" autocapitalize=\"characters\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"btn navy\" id=\"goBtn\">Devam</button></div>\n  </section>\n\n  <h2 class=\"sr-only\">Okuttuktan sonra ne göreceksiniz?</h2>\n  <div class=\"modes\">\n    <section class=\"mode take\">\n      <div class=\"mode-head\"><span class=\"tag\">ALMAK İÇİN</span><h3>Sandalyeyi ben alıyorum</h3></div>\n      <div class=\"flow\" id=\"flowTake\"></div>\n      <p class=\"muted\">Görevli “onaylandı” demeden sandalyeyi götürmeyin.</p>\n    </section>\n    <section class=\"mode give\">\n      <div class=\"mode-head\"><span class=\"tag\">BIRAKMAK İÇİN</span><h3>Sandalyeyi geri bırakıyorum</h3></div>\n      <div class=\"flow\" id=\"flowGive\"></div>\n      <p class=\"muted\">Aynı sandalyenin QR kodunu okutmanız yeterli.</p>\n    </section>\n  </div>\n\n  <div class=\"card help\"><b>Yardım mı lazım?</b> Herhangi bir danışma noktasındaki görevliye başvurabilirsiniz. Bilgileriniz yalnızca sandalye takibi için kullanılır.</div>\n</main>\n", "sandalye": "\n<a class=\"skip\" href=\"#main\">Ana içeriğe geç</a>\n<header class=\"top\"><div class=\"logo\"><img src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMGU4YThhIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iOSIgY3k9IjE4IiByPSI0Ii8+PGNpcmNsZSBjeD0iMTgiIGN5PSIyMCIgcj0iMS41Ii8+PHBhdGggZD0iTTYgM2gybDEgOGg3bDIgNU05IDExVjdoNiIvPjwvc3ZnPgo=\" width=\"26\" height=\"26\" alt=\"\"></div><h1>Etlik Şehir Hastanesi<small>Tekerlekli Sandalye Hizmeti</small></h1></header>\n<main id=\"main\" tabindex=\"-1\">\n  <div id=\"banner\" class=\"banner\" role=\"status\" aria-live=\"polite\"></div>\n  <div class=\"steps hidden\" id=\"steps\"></div>\n  <div class=\"card\" id=\"chairCard\" aria-busy=\"true\"><p class=\"muted\">Sandalye bilgisi yükleniyor…</p></div>\n  <div id=\"msg\" role=\"alert\"></div>\n\n  <form class=\"card hidden\" id=\"borrowForm\" novalidate>\n    <h2>Bilgilerinizi yazın</h2>\n    <p class=\"muted\">5 kısa bilgi yeterli. Bilgileriniz yalnızca bu sandalyenin takibi için kullanılır. <b>*</b> ile işaretli alanlar zorunludur.</p>\n    <label class=\"f\" for=\"fullName\">Adınız ve soyadınız *</label>\n    <input type=\"text\" id=\"fullName\" autocomplete=\"name\" required aria-describedby=\"fullName-err\"><div class=\"field-err\" id=\"fullName-err\"></div>\n    <div class=\"row2\">\n      <div><label class=\"f\" for=\"tc\">T.C. Kimlik Numaranız (11 hane) *</label><input type=\"tel\" id=\"tc\" inputmode=\"numeric\" maxlength=\"11\" required aria-describedby=\"tc-hint tc-err\"><small class=\"muted\" id=\"tc-hint\">Sandalye geri gelmezse size ulaşmak için.</small><div class=\"field-err\" id=\"tc-err\"></div></div>\n      <div><label class=\"f\" for=\"phone\">Telefon numaranız *</label><input type=\"tel\" id=\"phone\" inputmode=\"tel\" autocomplete=\"tel-national\" required aria-describedby=\"phone-hint phone-err\"><small class=\"muted\" id=\"phone-hint\">Örnek: 0532 123 45 67</small><div class=\"field-err\" id=\"phone-err\"></div></div>\n    </div>\n    <label class=\"f\" for=\"fromHospital\">Hangi hastaneden geldiniz? *</label>\n    <select id=\"fromHospital\" required aria-describedby=\"fromHospital-err\"></select><div class=\"field-err\" id=\"fromHospital-err\"></div>\n    <label class=\"f\" for=\"fromDepartment\">Hangi bölüme gidiyordunuz? *</label>\n    <input type=\"text\" id=\"fromDepartment\" placeholder=\"Örn: Kardiyoloji\" required aria-describedby=\"fromDepartment-err\"><div class=\"field-err\" id=\"fromDepartment-err\"></div>\n    <div id=\"faultBorrow\"></div>\n    <div class=\"kvkk\">\n      <label class=\"chk\"><input type=\"checkbox\" id=\"kvkkOk\" aria-describedby=\"kvkk-err\">Bilgilerimin yalnızca sandalye takibi için kullanılmasını kabul ediyorum. *</label>\n      <button type=\"button\" class=\"linklike\" data-kvkk>Ayrıntıyı oku (KVKK Aydınlatma Metni)</button>\n      <div class=\"field-err\" id=\"kvkk-err\"></div>\n    </div>\n    <div id=\"formMsg\" role=\"alert\"></div>\n    <button class=\"btn lg block\" style=\"margin-top:14px\" id=\"borrowBtn\">Kaydet ve görevliye git</button>\n    <p class=\"muted\" style=\"text-align:center\">Kaydettikten sonra bir görevliye gidip onay alın.</p>\n  </form>\n\n  <form class=\"card hidden\" id=\"returnForm\" novalidate>\n    <h2>Sandalyeyi bırakmadan önce 1 soru</h2>\n    <div id=\"faultReturn\"></div>\n    <label class=\"f\" for=\"returnNote\">Not (isteğe bağlı)</label>\n    <textarea id=\"returnNote\" maxlength=\"500\" placeholder=\"Örn: Ana giriş danışmasına bırakacağım\"></textarea>\n    <div id=\"returnMsg\" role=\"alert\"></div>\n    <button class=\"btn lg block\" style=\"margin-top:14px\">Tamam, Gönder</button>\n  </form>\n\n  <div class=\"card hidden\" id=\"done\" aria-live=\"polite\"></div>\n</main>\n<dialog id=\"kvkkDlg\" aria-labelledby=\"kvkkTitle\"><h2 class=\"dh\" id=\"kvkkTitle\">KVKK Aydınlatma Metni</h2><div class=\"db\" id=\"kvkkBody\">Yükleniyor…</div>\n  <div class=\"df\"><button class=\"btn ghost\" data-close>Kapat</button><button class=\"btn\" id=\"kvkkAccept\">Okudum, Onaylıyorum</button></div></dialog>\n", "giris": "\n<header class=\"top\"><div class=\"logo\"><img src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMGU4YThhIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iOSIgY3k9IjE4IiByPSI0Ii8+PGNpcmNsZSBjeD0iMTgiIGN5PSIyMCIgcj0iMS41Ii8+PHBhdGggZD0iTTYgM2gybDEgOGg3bDIgNU05IDExVjdoNiIvPjwvc3ZnPgo=\" width=\"26\" height=\"26\" alt=\"\"></div><h1>Etlik Şehir Hastanesi<small>Tekerlekli Sandalye Emanet Sistemi</small></h1></header>\n<main><form class=\"card login\" id=\"f\"><h2>Personel / Süpervizör Girişi</h2>\n  <label class=\"f\" for=\"u\">Kullanıcı adı</label><input type=\"text\" id=\"u\" autocomplete=\"username\" autocapitalize=\"none\" required>\n  <label class=\"f\" for=\"p\">Şifre</label><input type=\"password\" id=\"p\" autocomplete=\"current-password\" required>\n  <div id=\"msg\"></div><button class=\"btn block lg\" style=\"margin-top:14px\">Giriş Yap</button></form>\n<div class=\"card login demo-users\"><h2>Demo kullanıcıları</h2><p class=\"muted\">Şifre hepsinde: <b>demo1234</b></p>\n<dl class=\"kv\"><dt>admin</dt><dd>Admin: her şey</dd><dt>supervizor1</dt><dd>Süpervizör: tüm kampüs</dd>\n<dt>kalp.personel</dt><dd>Personel: yalnızca Kalp Damar</dd></dl></div></main>\n", "personel": "\n<header class=\"top\"><div class=\"logo\"><img src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMGU4YThhIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iOSIgY3k9IjE4IiByPSI0Ii8+PGNpcmNsZSBjeD0iMTgiIGN5PSIyMCIgcj0iMS41Ii8+PHBhdGggZD0iTTYgM2gybDEgOGg3bDIgNU05IDExVjdoNiIvPjwvc3ZnPgo=\" width=\"26\" height=\"26\" alt=\"\"></div><h1>Etlik Şehir Hastanesi<small>Tekerlekli Sandalye Emanet Sistemi</small></h1><div class=\"right\"><span id=\"who\"></span><a href=\"/admin\" id=\"adminLink\" class=\"hidden\" style=\"color:#fff\">Admin</a><button class=\"btn sm sec\" id=\"logout\">Çıkış</button></div></header>\n<main class=\"wide\">\n  <div class=\"stats\" id=\"stats\"></div>\n  <div class=\"tabs\"><button data-tab=\"queue\" class=\"on\">Onay Bekleyenler <span id=\"qn\"></span></button><button data-tab=\"active\">Kullanımdakiler <span id=\"an\"></span></button></div>\n  <div class=\"card\"><div class=\"toolbar\"><input type=\"search\" id=\"filter\" placeholder=\"ID No veya ad ile filtrele\"><span class=\"muted\" id=\"refreshed\"></span></div>\n    <div id=\"list\"></div></div>\n</main>\n", "admin": "\n<header class=\"top\"><div class=\"logo\"><img src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMGU4YThhIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iOSIgY3k9IjE4IiByPSI0Ii8+PGNpcmNsZSBjeD0iMTgiIGN5PSIyMCIgcj0iMS41Ii8+PHBhdGggZD0iTTYgM2gybDEgOGg3bDIgNU05IDExVjdoNiIvPjwvc3ZnPgo=\" width=\"26\" height=\"26\" alt=\"\"></div><h1>Etlik Şehir Hastanesi<small>Tekerlekli Sandalye Emanet Sistemi</small></h1><div class=\"right\"><span id=\"who\"></span><a href=\"/personel\" style=\"color:#fff\">Personel Ekranı</a><button class=\"btn sm sec\" id=\"logout\">Çıkış</button></div></header>\n<main class=\"wide\">\n  <div class=\"tabs\" id=\"tabs\">\n    <button data-tab=\"ozet\" class=\"on\">Özet</button><button data-tab=\"sandalyeler\">Sandalyeler</button><button data-tab=\"yukle\">Excel Yükle</button>\n    <button data-tab=\"hareketler\">Hareketler</button><button data-tab=\"arizalar\">Arızalar</button><button data-tab=\"raporlar\">Raporlar</button>\n    <button data-tab=\"kullanicilar\">Kullanıcılar</button><a class=\"btn sm ghost\" href=\"/etiket\" target=\"_blank\">QR Etiket Yazdır ↗</a>\n  </div>\n  <div id=\"view\"></div>\n</main>\n<dialog id=\"dlg\"><div class=\"dh\" id=\"dlgTitle\"></div><div class=\"db\" id=\"dlgBody\"></div><div class=\"df\" id=\"dlgFoot\"></div></dialog>\n", "etiket": "\n<div class=\"noprint\"><header class=\"top\"><div class=\"logo\"><img src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMGU4YThhIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iOSIgY3k9IjE4IiByPSI0Ii8+PGNpcmNsZSBjeD0iMTgiIGN5PSIyMCIgcj0iMS41Ii8+PHBhdGggZD0iTTYgM2gybDEgOGg3bDIgNU05IDExVjdoNiIvPjwvc3ZnPgo=\" width=\"26\" height=\"26\" alt=\"\"></div><h1>Etlik Şehir Hastanesi<small>Tekerlekli Sandalye Emanet Sistemi</small></h1><div class=\"right\"><a href=\"/admin\" style=\"color:#fff\">Admin'e dön</a></div></header>\n<main class=\"wide\"><div class=\"card\"><h2>Toplu QR Etiket Çıktısı</h2>\n  <div class=\"toolbar\"><select id=\"hospital\"><option value=\"\">Tüm hastaneler</option></select>\n  <input type=\"text\" id=\"ids\" placeholder=\"İsteğe bağlı: TS-0001, TS-0002\"><button class=\"btn\" id=\"gen\">Etiketleri Oluştur</button>\n  <button class=\"btn navy\" id=\"print\" disabled>🖨 Yazdır</button></div>\n  <p class=\"muted\" id=\"info\">A4 sayfa başına 21 etiket (3×7). Yazdırırken \"Gerçek boyut / %100\" seçin, kenar boşluklarını \"Yok\" yapın.</p></div></main></div>\n<div id=\"sheet\"></div>\n"};
 const DEMO_BAR = "<div class=\"demobar\"><b>DEMO</b><span class=\"dtxt\">Örnek veri · kayıtlar yalnızca bu tarayıcıda</span>\n<span class=\"dqr\"><input id=\"demoId\" type=\"text\" placeholder=\"QR simülasyonu: TS-0001\" autocapitalize=\"characters\"><button id=\"demoScan\">QR okut</button></span>\n<a href=\"/\">Hasta</a><a href=\"/personel\">Personel</a><a href=\"/admin\">Admin</a><button id=\"demoReset\">Sıfırla</button></div>";
 </script>
 <script>// Ortak yardımcılar: API çağrısı, ikonlar, adım infografiği, biçimlendirme.
 const ICONS = {
-  qr: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M17 20h4v-3"/></svg>',
-  form: '<svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg>',
-  staff: '<svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/><path d="M16 11l1.5 1.5L20 10"/></svg>',
-  done: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>',
-  check: '<svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>',
-  chair: '<svg viewBox="0 0 24 24"><circle cx="9" cy="18" r="4"/><circle cx="18" cy="20" r="1.5"/><path d="M6 3h2l1 8h7l2 5M9 11V7h6"/></svg>',
-  tekerlek: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2"/><path d="M12 3v7M12 14v7M3 12h7M14 12h7"/></svg>',
-  sirtlik: '<svg viewBox="0 0 24 24"><path d="M7 3v13M17 3v13M7 5h10M7 9h10M7 13h10M5 21l2-5M19 21l-2-5"/></svg>',
-  koltuk: '<svg viewBox="0 0 24 24"><rect x="4" y="9" width="16" height="6" rx="2"/><path d="M6 15v5M18 15v5"/></svg>',
-  tutamac: '<svg viewBox="0 0 24 24"><path d="M4 6h6v4M10 10v10M14 20V10M14 10V6h6"/></svg>',
-  diger: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>',
+  qr: '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M17 20h4v-3"/></svg>',
+  form: '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg>',
+  staff: '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/><path d="M16 11l1.5 1.5L20 10"/></svg>',
+  done: '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>',
+  check: '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>',
+  chair: '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><circle cx="9" cy="18" r="4"/><circle cx="18" cy="20" r="1.5"/><path d="M6 3h2l1 8h7l2 5M9 11V7h6"/></svg>',
+  tekerlek: '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2"/><path d="M12 3v7M12 14v7M3 12h7M14 12h7"/></svg>',
+  sirtlik: '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M7 3v13M17 3v13M7 5h10M7 9h10M7 13h10M5 21l2-5M19 21l-2-5"/></svg>',
+  koltuk: '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><rect x="4" y="9" width="16" height="6" rx="2"/><path d="M6 15v5M18 15v5"/></svg>',
+  tutamac: '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M4 6h6v4M10 10v10M14 20V10M14 10V6h6"/></svg>',
+  chairOut: '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><circle cx="8" cy="17" r="3.5"/><path d="M5 3h2l1 7h6l1.5 4M8 10V6h5"/><path d="M15 6h6M18 3l3 3-3 3"/></svg>',
+  chairIn: '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><circle cx="15" cy="17" r="3.5"/><path d="M12 3h2l1 7h6M12 10V6h-5"/><path d="M9 6H3M6 3L3 6l3 3"/></svg>',
+  wait: '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+  diger: '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>',
 };
 
 const STATUS = {
   musait: 'Müsait / Boşta', onay_bekliyor: 'Onay Bekliyor', kullanimda: 'Kullanımda',
   iade_bekliyor: 'İade Bekliyor', arizali: 'Arızalı / Bakımda',
 };
-const PART_HINT = { tekerlek: 'ön/arka, fren, dönme', sirtlik: 'sırt dayanağı', koltuk: 'oturma minderi', tutamac: 'itme kolu', diger: 'kısa not yazın' };
+const PART_HINT = { tekerlek: 'tekerlek, fren', sirtlik: 'arka dayanak', koltuk: 'oturma yeri', tutamac: 'tutma kolu', diger: 'kısaca yazın' };
+// Hasta ekranı için sade durum adları (personel/admin ekranları STATUS'u kullanır)
+const HASTA_STATUS = { musait: 'Boş, alabilirsiniz', onay_bekliyor: 'Görevli onayı bekleniyor', kullanimda: 'Birisi kullanıyor', iade_bekliyor: 'Geri bırakılıyor, kontrol bekleniyor', arizali: 'Bozuk, kullanılamıyor' };
+const hastaBadge = (s) => `<span class="badge b-${s}">${HASTA_STATUS[s] || s}</span>`;
 
 async function api(url, opts = {}) {
   const o = { headers: {}, credentials: 'same-origin', ...opts };
@@ -2549,64 +2585,76 @@ const fmt = (d) => (d ? new Date(d).toLocaleString('tr-TR', { day: '2-digit', mo
 const ago = (d) => { const m = Math.round((Date.now() - new Date(d)) / 60000); return m < 60 ? `${m} dk önce` : `${Math.floor(m / 60)} sa ${m % 60} dk önce`; };
 const badge = (s) => `<span class="badge b-${s}">${STATUS[s] || s}</span>`;
 
-// Hasta adımları: ALMAK ve GERİ BIRAKMAK için ayrı, sade Türkçe metinler.
+// Hasta adımları: ALMAK ve GERİ BIRAKMAK için ayrı metin ve ayrı ikonlar
 const STEP_LABELS = {
   take: ['QR kodu okutun', 'Bilgilerinizi yazın', 'Görevli onaylasın', 'Sandalye sizde'],
   give: ['QR kodu okutun', 'Sandalyeyi kontrol edin', 'Görevliye bırakın', 'Teşekkürler'],
 };
+const flowIcons = (mode) => (mode === 'give' ? [ICONS.qr, ICONS.check, ICONS.chairIn, ICONS.done] : [ICONS.qr, ICONS.form, ICONS.staff, ICONS.chairOut]);
 
 // Küçük akış infografiği (ana sayfada): ikon + kısa metin + ok
-function renderFlow(el, labels) {
-  const ic = [ICONS.qr, ICONS.form, ICONS.staff, ICONS.done];
-  el.innerHTML = labels.map((t, i) => `<div class="fl"><div class="ic">${ic[i]}</div><b>${i + 1}</b><span>${t}</span></div>`).join('<div class="arrow" aria-hidden="true">›</div>');
+function renderFlow(el, mode) {
+  const ic = flowIcons(mode);
+  el.setAttribute('role', 'list');
+  el.innerHTML = STEP_LABELS[mode].map((t, i) => `<div class="fl" role="listitem"><div class="ic" aria-hidden="true">${ic[i]}</div><b aria-hidden="true">${i + 1}</b><span><span class="sr-only">Adım ${i + 1}: </span>${t}</span></div>`).join('<div class="arrow" aria-hidden="true">›</div>');
 }
 
-function renderSteps(el, active, labels) {
-  const L = labels || STEP_LABELS.take;
-  const ic = [ICONS.qr, ICONS.form, ICONS.staff, ICONS.done];
+// Adım şeridi. active: 1-4; mode: 'take' | 'give'
+function renderSteps(el, active, mode = 'take') {
+  const L = STEP_LABELS[mode], ic = flowIcons(mode);
+  el.classList.remove('hidden');
+  el.setAttribute('role', 'list'); el.setAttribute('aria-label', 'İşlem adımları');
   el.innerHTML = L.map((t, i) => {
     const n = i + 1;
     const cls = n < active ? 'done' : n === active ? 'active' : '';
-    return `<div class="step ${cls}"><span class="n">${n}</span><div class="ic">${n < active ? ICONS.check : ic[i]}</div>${t}</div>`;
+    const sr = n < active ? ' (tamamlandı)' : n === active ? ' (şu anki adım)' : '';
+    return `<div class="step ${cls}" role="listitem" ${n === active ? 'aria-current="step"' : ''}><span class="n" aria-hidden="true">${n}</span><div class="ic" aria-hidden="true">${n < active ? ICONS.check : ic[i]}</div><span>${t}<span class="sr-only">${sr}</span></span></div>`;
   }).join('');
 }
 
 function toast(el, msg, type = 'err') {
-  el.innerHTML = msg ? `<div class="alert ${type}">${esc(msg)}</div>` : '';
-  if (msg) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  const pre = { err: 'Hata: ', ok: 'Başarılı: ', warn: 'Uyarı: ', info: 'Bilgi: ' }[type] || '';
+  el.setAttribute('role', 'alert');
+  el.innerHTML = msg ? `<div class="alert ${type}" tabindex="-1"><strong>${pre}</strong>${esc(msg)}</div>` : '';
+  if (msg) {
+    const a = el.firstElementChild; a.focus({ preventScroll: true });
+    a.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+  }
 }
 
 async function logout() { await api('/api/auth/logout', { method: 'POST' }); DEMO.href = '/giris'; }
 
-// "Sandalyede arıza var mı?" bileşeni. Hem ödünç alma hem iade formunda kullanılır.
+// "Sandalyede bozukluk var mı?" bileşeni. Hem alma hem geri bırakma formunda kullanılır.
+let faultUid = 0;
 function mountFaultPicker(root) {
+  const uid = ++faultUid;
   const parts = ['tekerlek', 'sirtlik', 'koltuk', 'tutamac', 'diger'];
-  const names = { tekerlek: 'Tekerlek', sirtlik: 'Sırtlık', koltuk: 'Koltuk', tutamac: 'Tutamaç', diger: 'Diğer' };
+  const names = { tekerlek: 'Tekerlek', sirtlik: 'Arka dayanak', koltuk: 'Oturma yeri', tutamac: 'Tutma kolu', diger: 'Başka yer' };
   root.innerHTML = `
-    <label class="f">Sandalyede bozukluk var mı? *</label>
+    <fieldset><legend class="f">Sandalyede bozukluk var mı? *</legend>
     <div class="choice">
-      <label data-v="no"><input type="radio" name="fault" value="no">✓ Hayır, sağlam<br><small class="muted">Sorun görmedim</small></label>
-      <label data-v="yes"><input type="radio" name="fault" value="yes">⚠ Evet, bozuk<br><small class="muted">Neresi bozuk, seçeceğim</small></label>
-    </div>
+      <label data-v="no"><input type="radio" name="fault${uid}" value="no"><span>Hayır, sağlam</span><br><small class="muted">Sorun görmedim</small></label>
+      <label data-v="yes"><input type="radio" name="fault${uid}" value="yes"><span>Evet, bozuk</span><br><small class="muted">Neresi bozuk, seçeceğim</small></label>
+    </div></fieldset>
     <div class="fault-detail hidden">
+      <fieldset><legend class="f">Bozuk olan yer(ler)</legend>
       <div class="parts">${parts.map((p) => `
         <label data-p="${p}"><input type="checkbox" value="${p}">${ICONS[p]}${names[p]}<small>${PART_HINT[p]}</small></label>`).join('')}
-      </div>
-      <label class="f">Kısaca anlatın</label>
-      <textarea maxlength="500" placeholder="Örn: sol arka tekerlek fren tutmuyor"></textarea>
+      </div></fieldset>
+      <label class="f" for="fnote${uid}">Kısaca anlatın</label>
+      <textarea id="fnote${uid}" maxlength="500" placeholder="Örn: sol arka tekerlek fren tutmuyor"></textarea>
     </div>`;
   const detail = $('.fault-detail', root);
-  $$('.choice label', root).forEach((l) => l.addEventListener('click', () => {
+  $$('input[type=radio]', root).forEach((r) => r.addEventListener('change', () => {
     $$('.choice label', root).forEach((x) => x.classList.remove('on-ok', 'on-bad'));
-    l.classList.add(l.dataset.v === 'no' ? 'on-ok' : 'on-bad');
-    $('input', l).checked = true;
-    detail.classList.toggle('hidden', l.dataset.v !== 'yes');
+    r.closest('label').classList.add(r.value === 'no' ? 'on-ok' : 'on-bad');
+    detail.classList.toggle('hidden', r.value !== 'yes');
   }));
-  $$('.parts label', root).forEach((l) => $('input', l).addEventListener('change', (e) => l.classList.toggle('on', e.target.checked)));
+  $$('.parts input', root).forEach((i) => i.addEventListener('change', () => i.closest('label').classList.toggle('on', i.checked)));
 
   return {
     value() {
-      const sel = $('input[name=fault]:checked', root);
+      const sel = $('input[type=radio]:checked', root);
       if (!sel) return null;
       if (sel.value === 'no') return { has: false };
       return { has: true, parts: $$('.parts input:checked', root).map((i) => i.value), note: $('textarea', root).value.trim() };
@@ -2953,14 +3001,14 @@ load();
 
 const PAGES = {
 "index": function(){ (function(setInterval, alert, confirm, prompt){
-renderFlow($('#flowTake'), STEP_LABELS.take);
-renderFlow($('#flowGive'), STEP_LABELS.give);
+renderFlow($('#flowTake'), 'take');
+renderFlow($('#flowGive'), 'give');
 
 // QR içeriği ya tam URL (…/s?id=TS-0001) ya da yalnızca ID olabilir
 function idFromText(text) {
   try { const u = new URL(text); return u.searchParams.get('id') || ''; } catch { return text.trim(); }
 }
-const go = (id) => { if (id) DEMO.href = '/s?id=' + encodeURIComponent(id.trim().toUpperCase()); };
+const go = (id) => { if (!id || !id.trim()) return toast($('#msg'), 'Sandalye numarasını yazın.'); DEMO.href = '/s?id=' + encodeURIComponent(id.trim().toUpperCase()); };
 
 $('#goBtn').addEventListener('click', () => go($('#manual').value));
 $('#manual').addEventListener('keydown', (e) => { if (e.key === 'Enter') go(e.target.value); });
@@ -2976,52 +3024,82 @@ $('#scanBtn').addEventListener('click', async () => {
       go(idFromText(text));
     });
     $('#scanBtn').classList.add('hidden');
+    $('#stopBtn').classList.remove('hidden'); $('#stopBtn').focus();
   } catch (e) {
     reader.classList.add('hidden');
     toast($('#msg'), 'Kamera açılamadı. Tarayıcıya kamera izni verin veya telefonunuzun kamera uygulamasıyla QR kodu okutun.');
   }
 });
 
+$('#stopBtn').addEventListener('click', async () => {
+  try { await scanner.stop(); } catch (e) { /* kamera zaten kapalı */ }
+  $('#reader').classList.add('hidden'); $('#stopBtn').classList.add('hidden');
+  $('#scanBtn').classList.remove('hidden'); $('#scanBtn').focus();
+});
+
 })(demoSetInterval, demoAlert, demoConfirm, demoPrompt); },
 "sandalye": function(){ (function(setInterval, alert, confirm, prompt){
 // QR okutulduktan sonra açılan hasta/refakatçi ekranı: /s?id=TS-0001
 const chairId = (new URLSearchParams(DEMO.search).get('id') || '').trim().toUpperCase();
-let meta, chair, borrowFault, returnFault;
-
-renderSteps($('#steps'), 2, STEP_LABELS.take);
+let meta, chair, borrowFault, returnFault, mode = 'take';
 
 async function init() {
-  if (!chairId) { $('#chairCard').innerHTML = '<div class="alert err">QR kod geçersiz. <a href="/">Ana sayfaya dönün</a>.</div>'; return; }
+  if (!chairId) { $('#chairCard').innerHTML = '<div class="alert err">QR kod geçersiz. <a href="/">Ana sayfaya dönün</a>.</div>'; $('#chairCard').removeAttribute('aria-busy'); return; }
   try {
     [meta, chair] = await Promise.all([api('/api/meta'), api('/api/chairs/' + encodeURIComponent(chairId))]);
   } catch (e) {
     $('#chairCard').innerHTML = `<div class="alert err">${esc(e.message)}</div><a class="btn sec" href="/">Başka QR okut</a>`;
+    $('#chairCard').removeAttribute('aria-busy');
     return;
   }
+  $('#chairCard').removeAttribute('aria-busy');
   $('#chairCard').innerHTML = `
-    <div class="chair"><div class="ic">${ICONS.chair}</div>
-      <div><div class="id">${esc(chair.idNo)}</div><div><b>Tanımlı Mahal:</b> ${esc(chair.mahal)}</div>
-      <div style="margin-top:4px">${badge(chair.status)}</div></div></div>`;
+    <div class="chair"><div class="ic" aria-hidden="true">${ICONS.chair}</div>
+      <div><div class="id">${esc(chair.idNo)}</div><div><b>Sandalyenin yeri:</b> ${esc(chair.mahal)}</div>
+      <div style="margin-top:4px">${hastaBadge(chair.status)}</div></div></div>`;
 
   if (chair.action === 'borrow') setupBorrow();
   else if (chair.action === 'return') setupReturn();
   else if (chair.action === 'wait') {
-    renderSteps($('#steps'), 3, STEP_LABELS.take);
-    setBanner('wait', 'Görevli bu sandalyeyi kontrol ediyor', 'Bu sandalye için bir işlem başlatılmış. Görevli onaylayınca işlem tamamlanır. Lütfen görevliye başvurun.');
+    setBanner('wait', 'Bu sandalye için bir işlem sürüyor', 'Bu işlemi siz başlattıysanız görevliye takip kodunuzu gösterin. Değilse başka bir sandalye seçin.');
   } else {
-    $('#steps').classList.add('hidden');
-    setBanner('bad', 'Bu sandalye şu an verilemiyor', 'Sandalye bakımda. Lütfen başka bir sandalye seçin veya en yakın danışmadaki görevliye başvurun.');
+    setBanner('bad', 'Bu sandalye şu an verilemiyor', 'Sandalye bozuk. Lütfen başka bir sandalye seçin veya en yakın danışmadaki görevliye başvurun.');
   }
 }
 
 function setBanner(kind, title, sub) {
   const b = $('#banner');
   b.className = 'banner ' + kind;
-  b.innerHTML = `<b>${title}</b><span>${sub}</span>`;
+  b.innerHTML = `<h2 class="bt">${title}</h2><span>${sub}</span>`;
+  document.title = title + (chair ? ' | ' + chair.idNo : '') + ' | Etlik Şehir Hastanesi';
+}
+
+const REDUCE = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Alan bazlı doğrulama: hatalı alan işaretlenir, ilk hatalıya odaklanılır
+function checkFields() {
+  const rules = [
+    ['fullName', (v) => v.trim().split(/\s+/).length >= 2, 'Adınızı ve soyadınızı yazın.'],
+    ['tc', (v) => v.length === 11, 'T.C. Kimlik Numarası 11 haneli olmalı.'],
+    ['phone', (v) => v.replace(/\D/g, '').length >= 10, 'Telefon numaranızı yazın.'],
+    ['fromHospital', (v) => !!v, 'Hangi hastaneden geldiğinizi seçin.'],
+    ['fromDepartment', (v) => !!v.trim(), 'Hangi bölüme gittiğinizi yazın.'],
+  ];
+  let first = null;
+  for (const [id, ok, msg] of rules) {
+    const el = $('#' + id), err = $('#' + id + '-err');
+    const bad = !ok(el.value);
+    el.setAttribute('aria-invalid', bad ? 'true' : 'false');
+    err.textContent = bad ? msg : '';
+    if (bad && !first) first = el;
+  }
+  return first;
 }
 
 function setupBorrow() {
+  mode = 'take';
   setBanner('take', 'Bu sandalyeyi ALIYORSUNUZ', 'Aşağıdaki bilgileri doldurun. Görevli onaylayınca sandalyeyi götürebilirsiniz.');
+  renderSteps($('#steps'), 2, 'take');
   const f = $('#borrowForm');
   f.classList.remove('hidden');
   $('#fromHospital').innerHTML = '<option value="">Seçin…</option>' +
@@ -3029,22 +3107,24 @@ function setupBorrow() {
   borrowFault = mountFaultPicker($('#faultBorrow'));
 
   const kvkk = $('#kvkkOk');
-  kvkk.addEventListener('change', () => { $('#borrowBtn').disabled = !kvkk.checked; });
   $('#tc').addEventListener('input', (e) => { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 11); });
 
   f.addEventListener('submit', async (e) => {
     e.preventDefault();
+    toast($('#formMsg'), '');
+    const firstBad = checkFields();
     const fault = borrowFault.value();
-    const errs = [];
-    if ($('#fullName').value.trim().split(/\s+/).length < 2) errs.push('Ad ve soyadı yazın.');
-    if ($('#tc').value.length !== 11) errs.push('T.C. Kimlik No 11 haneli olmalı.');
-    if ($('#phone').value.replace(/\D/g, '').length < 10) errs.push('Telefon numarasını yazın.');
-    if (!$('#fromHospital').value) errs.push('Geldiğiniz hastaneyi seçin.');
-    if (!$('#fromDepartment').value.trim()) errs.push('Bölüm / poliklinik / servisi yazın.');
-    if (!fault) errs.push('Sandalyede arıza olup olmadığını seçin.');
-    else if (fault.has && !fault.parts.length) errs.push('Arızalı parçayı işaretleyin.');
-    if (!kvkk.checked) errs.push('KVKK onayı zorunludur.');
-    if (errs.length) return toast($('#formMsg'), errs.join(' '));
+    const extra = [];
+    if (!fault) extra.push('Sandalyede bozukluk olup olmadığını seçin.');
+    else if (fault.has && !fault.parts.length) extra.push('Bozuk olan yeri işaretleyin.');
+    kvkk.setAttribute('aria-invalid', kvkk.checked ? 'false' : 'true');
+    $('#kvkk-err').textContent = kvkk.checked ? '' : 'Devam etmek için bu kutuyu işaretleyin.';
+    if (!kvkk.checked) extra.push('Devam etmek için onay kutusunu işaretleyin.');
+    if (firstBad || extra.length) {
+      toast($('#formMsg'), firstBad ? 'Formda eksik veya hatalı alan var. ' + extra.join(' ') : extra.join(' '));
+      if (firstBad) firstBad.focus();
+      return;
+    }
 
     $('#borrowBtn').disabled = true;
     try {
@@ -3053,7 +3133,7 @@ function setupBorrow() {
         fromHospital: $('#fromHospital').value, fromDepartment: $('#fromDepartment').value,
         fault, kvkkAccepted: true, kvkkVersion: meta.kvkkVersion,
       } });
-      finish(f, r, 'Talebiniz alındı', 'Şimdi bir görevliye gidin ve bu ekranı gösterin. Görevli onaylayınca sandalyeyi götürebilirsiniz. <b>Onaydan önce sandalyeyi götürmeyin.</b>');
+      finish(f, r, 'Kaydınız alındı');
     } catch (err) {
       toast($('#formMsg'), err.message);
       $('#borrowBtn').disabled = false;
@@ -3061,44 +3141,63 @@ function setupBorrow() {
   });
 
   // KVKK modal
-  $('[data-kvkk]').addEventListener('click', async (e) => {
-    e.preventDefault();
+  $('[data-kvkk]').addEventListener('click', async () => {
     const dlg = $('#kvkkDlg');
     dlg.showModal();
-    if (!dlg.dataset.loaded) { $('#kvkkBody').innerHTML = DEMO.kvkk; dlg.dataset.loaded = 1; }
+    if (!dlg.dataset.loaded) {
+      try {
+        const r = await fetch('/kvkk-metni.html');
+        if (!r.ok) throw new Error('yüklenemedi');
+        $('#kvkkBody').innerHTML = await r.text(); dlg.dataset.loaded = 1;
+      } catch (err) { $('#kvkkBody').textContent = 'Metin yüklenemedi. Lütfen görevliye başvurun.'; }
+    }
   });
   $('[data-close]').addEventListener('click', () => $('#kvkkDlg').close());
-  $('#kvkkAccept').addEventListener('click', () => { kvkk.checked = true; kvkk.dispatchEvent(new Event('change')); $('#kvkkDlg').close(); });
+  $('#kvkkAccept').addEventListener('click', () => {
+    kvkk.checked = true; kvkk.setAttribute('aria-invalid', 'false'); $('#kvkk-err').textContent = '';
+    $('#kvkkDlg').close(); kvkk.focus();
+  });
 }
 
 function setupReturn() {
+  mode = 'give';
   setBanner('give', 'Bu sandalyeyi GERİ BIRAKIYORSUNUZ', 'Sandalyeyi kullanmayı bitirdiniz. Aşağıdaki soruyu cevaplayın, sonra sandalyeyi görevliye bırakın.');
-  renderSteps($('#steps'), 2, STEP_LABELS.give);
+  renderSteps($('#steps'), 2, 'give');
   const f = $('#returnForm');
   f.classList.remove('hidden');
   returnFault = mountFaultPicker($('#faultReturn'));
   f.addEventListener('submit', async (e) => {
     e.preventDefault();
     const fault = returnFault.value();
-    if (!fault) return toast($('#returnMsg'), 'Sandalyede arıza olup olmadığını seçin.');
-    if (fault.has && !fault.parts.length) return toast($('#returnMsg'), 'Arızalı parçayı işaretleyin.');
+    if (!fault) return toast($('#returnMsg'), 'Sandalyede bozukluk olup olmadığını seçin.');
+    if (fault.has && !fault.parts.length) return toast($('#returnMsg'), 'Bozuk olan yeri işaretleyin.');
     const btn = $('button', f); btn.disabled = true;
     try {
       const r = await api('/api/returns', { method: 'POST', body: { chairId, fault, note: $('#returnNote').value } });
-      finish(f, r, 'Teşekkürler, bildirimi aldık', 'Şimdi sandalyeyi bir görevliye ya da <b>' + esc(chair.mahal) + '</b> noktasına bırakın. Görevli kontrol edince işlem biter.');
+      finish(f, r, 'Teşekkürler, bilgi alındı');
     } catch (err) { toast($('#returnMsg'), err.message); btn.disabled = false; }
   });
 }
 
-function finish(form, r, title, text) {
+// Bitiş ekranı. Almak akışında yeşil tik YOK: önce görevliye gidilmesi gerekir.
+function finish(form, r, title) {
   form.classList.add('hidden');
   toast($('#msg'), '');
-  renderSteps($('#steps'), 3, chair.action === 'return' ? STEP_LABELS.give : STEP_LABELS.take);
+  renderSteps($('#steps'), 3, mode);
   const d = $('#done');
   d.classList.remove('hidden');
-  d.innerHTML = `<div class="big-ok"><div class="ic">${ICONS.check}</div><h2>${title}</h2>
-    <div class="muted">Takip kodu</div><div class="ref">${esc(r.refCode)}</div><p>${text}</p></div>`;
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  const code = `<div class="muted">Görevliye bu kodu gösterin</div><div class="ref">${esc(r.refCode)}</div>`;
+  if (mode === 'take') {
+    d.innerHTML = `<div class="big-ok"><div class="ic wait" aria-hidden="true">${ICONS.wait}</div><h2 tabindex="-1" id="doneTitle">${title}</h2>${code}
+      <div class="next"><b>ŞİMDİ:</b> Bir görevliye gidin ve bu ekranı gösterin.</div>
+      <div class="stop"><span aria-hidden="true">✋</span> Görevli “onaylandı” demeden sandalyeyi GÖTÜRMEYİN.</div></div>`;
+  } else {
+    d.innerHTML = `<div class="big-ok"><div class="ic" aria-hidden="true">${ICONS.check}</div><h2 tabindex="-1" id="doneTitle">${title}</h2>${code}
+      <div class="next"><b>ŞİMDİ:</b> Sandalyeyi bir görevliye ya da <b>${esc(chair.mahal)}</b> noktasına bırakın.</div>
+      <p>Görevli sandalyeye bakınca iş tamam.</p></div>`;
+  }
+  $('#doneTitle').focus({ preventScroll: true });
+  window.scrollTo({ top: 0, behavior: REDUCE ? 'auto' : 'smooth' });
 }
 
 init();

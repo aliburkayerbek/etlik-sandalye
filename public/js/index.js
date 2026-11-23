@@ -1,11 +1,11 @@
-renderFlow($('#flowTake'), STEP_LABELS.take);
-renderFlow($('#flowGive'), STEP_LABELS.give);
+renderFlow($('#flowTake'), 'take');
+renderFlow($('#flowGive'), 'give');
 
 // QR içeriği ya tam URL (…/s?id=TS-0001) ya da yalnızca ID olabilir
 function idFromText(text) {
   try { const u = new URL(text); return u.searchParams.get('id') || ''; } catch { return text.trim(); }
 }
-const go = (id) => { if (id) location.href = '/s?id=' + encodeURIComponent(id.trim().toUpperCase()); };
+const go = (id) => { if (!id || !id.trim()) return toast($('#msg'), 'Sandalye numarasını yazın.'); location.href = '/s?id=' + encodeURIComponent(id.trim().toUpperCase()); };
 
 $('#goBtn').addEventListener('click', () => go($('#manual').value));
 $('#manual').addEventListener('keydown', (e) => { if (e.key === 'Enter') go(e.target.value); });
@@ -21,8 +21,15 @@ $('#scanBtn').addEventListener('click', async () => {
       go(idFromText(text));
     });
     $('#scanBtn').classList.add('hidden');
+    $('#stopBtn').classList.remove('hidden'); $('#stopBtn').focus();
   } catch (e) {
     reader.classList.add('hidden');
     toast($('#msg'), 'Kamera açılamadı. Tarayıcıya kamera izni verin veya telefonunuzun kamera uygulamasıyla QR kodu okutun.');
   }
+});
+
+$('#stopBtn').addEventListener('click', async () => {
+  try { await scanner.stop(); } catch (e) { /* kamera zaten kapalı */ }
+  $('#reader').classList.add('hidden'); $('#stopBtn').classList.add('hidden');
+  $('#scanBtn').classList.remove('hidden'); $('#scanBtn').focus();
 });
