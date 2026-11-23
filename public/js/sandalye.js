@@ -2,7 +2,7 @@
 const chairId = (new URLSearchParams(location.search).get('id') || '').trim().toUpperCase();
 let meta, chair, borrowFault, returnFault;
 
-renderSteps($('#steps'), 2);
+renderSteps($('#steps'), 2, STEP_LABELS.take);
 
 async function init() {
   if (!chairId) { $('#chairCard').innerHTML = '<div class="alert err">QR kod geçersiz. <a href="/">Ana sayfaya dönün</a>.</div>'; return; }
@@ -20,14 +20,22 @@ async function init() {
   if (chair.action === 'borrow') setupBorrow();
   else if (chair.action === 'return') setupReturn();
   else if (chair.action === 'wait') {
-    renderSteps($('#steps'), 3);
-    toast($('#msg'), 'Bu sandalye için bekleyen bir işlem var. Görevli personel onayladığında işlem tamamlanacaktır.', 'info');
+    renderSteps($('#steps'), 3, STEP_LABELS.take);
+    setBanner('wait', 'Görevli bu sandalyeyi kontrol ediyor', 'Bu sandalye için bir işlem başlatılmış. Görevli onaylayınca işlem tamamlanır. Lütfen görevliye başvurun.');
   } else {
-    toast($('#msg'), 'Bu sandalye şu anda arızalı / bakımda olduğu için verilemiyor. Lütfen en yakın danışmaya başvurun.', 'warn');
+    $('#steps').classList.add('hidden');
+    setBanner('bad', 'Bu sandalye şu an verilemiyor', 'Sandalye bakımda. Lütfen başka bir sandalye seçin veya en yakın danışmadaki görevliye başvurun.');
   }
 }
 
+function setBanner(kind, title, sub) {
+  const b = $('#banner');
+  b.className = 'banner ' + kind;
+  b.innerHTML = `<b>${title}</b><span>${sub}</span>`;
+}
+
 function setupBorrow() {
+  setBanner('take', 'Bu sandalyeyi ALIYORSUNUZ', 'Aşağıdaki bilgileri doldurun. Görevli onaylayınca sandalyeyi götürebilirsiniz.');
   const f = $('#borrowForm');
   f.classList.remove('hidden');
   $('#fromHospital').innerHTML = '<option value="">Seçin…</option>' +
@@ -59,7 +67,7 @@ function setupBorrow() {
         fromHospital: $('#fromHospital').value, fromDepartment: $('#fromDepartment').value,
         fault, kvkkAccepted: true, kvkkVersion: meta.kvkkVersion,
       } });
-      finish(f, r, 'Talebiniz alındı', 'Görevli personel kontrol edip <b>“Onayla ve Teslim Et”</b> dediğinde sandalye size teslim edilir. Bu ekranı görevliye gösterebilirsiniz.');
+      finish(f, r, 'Talebiniz alındı', 'Şimdi bir görevliye gidin ve bu ekranı gösterin. Görevli onaylayınca sandalyeyi götürebilirsiniz. <b>Onaydan önce sandalyeyi götürmeyin.</b>');
     } catch (err) {
       toast($('#formMsg'), err.message);
       $('#borrowBtn').disabled = false;
@@ -78,7 +86,8 @@ function setupBorrow() {
 }
 
 function setupReturn() {
-  renderSteps($('#steps'), 2, ['QR Okut', 'Kontrol ve Teslim Notu', 'Personel Teslim Alsın', 'İşlem Tamam']);
+  setBanner('give', 'Bu sandalyeyi GERİ BIRAKIYORSUNUZ', 'Sandalyeyi kullanmayı bitirdiniz. Aşağıdaki soruyu cevaplayın, sonra sandalyeyi görevliye bırakın.');
+  renderSteps($('#steps'), 2, STEP_LABELS.give);
   const f = $('#returnForm');
   f.classList.remove('hidden');
   returnFault = mountFaultPicker($('#faultReturn'));
@@ -90,7 +99,7 @@ function setupReturn() {
     const btn = $('button', f); btn.disabled = true;
     try {
       const r = await api('/api/returns', { method: 'POST', body: { chairId, fault, note: $('#returnNote').value } });
-      finish(f, r, 'İade talebiniz düştü', 'Lütfen sandalyeyi görevli personele veya <b>' + esc(chair.mahal) + '</b> noktasına teslim edin. Görevli <b>“İadeyi Onayla”</b> dediğinde işlem tamamlanır.');
+      finish(f, r, 'Teşekkürler, bildirimi aldık', 'Şimdi sandalyeyi bir görevliye ya da <b>' + esc(chair.mahal) + '</b> noktasına bırakın. Görevli kontrol edince işlem biter.');
     } catch (err) { toast($('#returnMsg'), err.message); btn.disabled = false; }
   });
 }
@@ -98,7 +107,7 @@ function setupReturn() {
 function finish(form, r, title, text) {
   form.classList.add('hidden');
   toast($('#msg'), '');
-  renderSteps($('#steps'), 3, chair.action === 'return' ? ['QR Okut', 'Kontrol ve Teslim Notu', 'Personel Teslim Alsın', 'İşlem Tamam'] : undefined);
+  renderSteps($('#steps'), 3, chair.action === 'return' ? STEP_LABELS.give : STEP_LABELS.take);
   const d = $('#done');
   d.classList.remove('hidden');
   d.innerHTML = `<div class="big-ok"><div class="ic">${ICONS.check}</div><h2>${title}</h2>

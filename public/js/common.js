@@ -39,9 +39,20 @@ const fmt = (d) => (d ? new Date(d).toLocaleString('tr-TR', { day: '2-digit', mo
 const ago = (d) => { const m = Math.round((Date.now() - new Date(d)) / 60000); return m < 60 ? `${m} dk önce` : `${Math.floor(m / 60)} sa ${m % 60} dk önce`; };
 const badge = (s) => `<span class="badge b-${s}">${STATUS[s] || s}</span>`;
 
-// 1. QR Okut -> 2. Kontrol & Form + KVKK -> 3. Personel Onayı -> 4. Tamam
+// Hasta adımları: ALMAK ve GERİ BIRAKMAK için ayrı, sade Türkçe metinler.
+const STEP_LABELS = {
+  take: ['QR kodu okutun', 'Bilgilerinizi yazın', 'Görevli onaylasın', 'Sandalye sizde'],
+  give: ['QR kodu okutun', 'Sandalyeyi kontrol edin', 'Görevliye bırakın', 'Teşekkürler'],
+};
+
+// Küçük akış infografiği (ana sayfada): ikon + kısa metin + ok
+function renderFlow(el, labels) {
+  const ic = [ICONS.qr, ICONS.form, ICONS.staff, ICONS.done];
+  el.innerHTML = labels.map((t, i) => `<div class="fl"><div class="ic">${ic[i]}</div><b>${i + 1}</b><span>${t}</span></div>`).join('<div class="arrow" aria-hidden="true">›</div>');
+}
+
 function renderSteps(el, active, labels) {
-  const L = labels || ['QR Okut', 'Kontrol, Form ve KVKK', 'Personel Onaylasın', 'İşlem Tamam'];
+  const L = labels || STEP_LABELS.take;
   const ic = [ICONS.qr, ICONS.form, ICONS.staff, ICONS.done];
   el.innerHTML = L.map((t, i) => {
     const n = i + 1;

@@ -1,12 +1,13 @@
 <!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="/css/style.css"><title>Sandalye | Etlik Şehir Hastanesi</title></head><body>
 <header class="top"><div class="logo"><img src="/img/logo.svg" width="26" height="26" alt=""></div><h1>Etlik Şehir Hastanesi<small>Tekerlekli Sandalye Emanet Sistemi</small></h1></header>
 <main>
+  <div id="banner" class="banner"></div>
   <div class="steps" id="steps"></div>
   <div class="card" id="chairCard"><p class="muted">Sandalye bilgisi yükleniyor…</p></div>
   <div id="msg"></div>
 
   <form class="card hidden" id="borrowForm" novalidate>
-    <h2>Sandalyeyi Teslim Al</h2>
+    <h2>Bilgilerinizi yazın</h2><p class="muted">Bilgileriniz yalnızca bu sandalyenin takibi için kullanılır.</p>
     <label class="f" for="fullName">Ad Soyad *</label><input type="text" id="fullName" autocomplete="name" required>
     <div class="row2">
       <div><label class="f" for="tc">T.C. Kimlik No *</label><input type="tel" id="tc" inputmode="numeric" maxlength="11" required></div>
@@ -20,17 +21,17 @@
       <label class="chk"><input type="checkbox" id="kvkkOk" required>KVKK Aydınlatma Metni'ni okudum, anladım ve onaylıyorum. *</label>
     </div>
     <div id="formMsg"></div>
-    <button class="btn lg block" style="margin-top:14px" id="borrowBtn" disabled>Talebi Gönder</button>
-    <p class="muted" style="text-align:center">Gönderdikten sonra görevli personel onaylayacaktır.</p>
+    <button class="btn lg block" style="margin-top:14px" id="borrowBtn" disabled>Tamam, Gönder</button>
+    <p class="muted" style="text-align:center">Gönderdikten sonra bir görevliye gidip onay alın.</p>
   </form>
 
   <form class="card hidden" id="returnForm" novalidate>
-    <h2>Sandalyeyi Teslim Et (İade)</h2>
+    <h2>Bırakmadan önce son bir soru</h2>
     <div id="faultReturn"></div>
-    <label class="f" for="returnNote">Teslim notu (isteğe bağlı)</label>
-    <textarea id="returnNote" maxlength="500" placeholder="Örn: Kalp Damar Ana Giriş danışmasına bıraktım"></textarea>
+    <label class="f" for="returnNote">Not (isteğe bağlı)</label>
+    <textarea id="returnNote" maxlength="500" placeholder="Örn: Ana giriş danışmasına bıraktım"></textarea>
     <div id="returnMsg"></div>
-    <button class="btn lg block" style="margin-top:14px">İade Talebini Gönder</button>
+    <button class="btn lg block" style="margin-top:14px">Sandalyeyi Bıraktım, Gönder</button>
   </form>
 
   <div class="card hidden" id="done"></div>

@@ -122,3 +122,29 @@ table.t th { background: var(--bg); position: sticky; top: 0; font-size: 13px; }
 
 #reader { width: 100%; border-radius: 12px; overflow: hidden; }
 .login { max-width: 400px; margin: 40px auto; }
+
+/* Hasta ekranı: sade, büyük, infografik */
+.hero { background: var(--card); border-radius: var(--r); padding: 20px 16px; margin-bottom: 14px; box-shadow: 0 1px 3px rgba(18,53,91,.08); }
+.hero h2 { font-size: 24px; margin: 0 0 6px; color: var(--navy); }
+.hero p { margin: 0 0 14px; font-size: 17px; }
+.modes { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+@media (max-width: 700px) { .modes { grid-template-columns: 1fr; } }
+.mode { background: var(--card); border-radius: var(--r); padding: 16px; border-top: 8px solid var(--teal); box-shadow: 0 1px 3px rgba(18,53,91,.08); }
+.mode.give { border-top-color: var(--warn); }
+.mode .tag { display: inline-block; font-size: 12px; font-weight: 800; letter-spacing: .8px; padding: 3px 10px; border-radius: 999px; background: var(--teal-l); color: var(--teal); }
+.mode.give .tag { background: var(--warn-l); color: var(--warn); }
+.mode h3 { margin: 8px 0 12px; font-size: 20px; }
+.flow { display: flex; align-items: flex-start; justify-content: space-between; gap: 2px; margin-bottom: 10px; }
+.flow .fl { flex: 1; text-align: center; font-size: 13px; font-weight: 600; line-height: 1.25; position: relative; }
+.flow .fl b { position: absolute; top: -4px; left: 50%; margin-left: 12px; width: 20px; height: 20px; border-radius: 50%; background: var(--navy); color: #fff; font-size: 12px; display: grid; place-items: center; }
+.flow .ic { width: 52px; height: 52px; margin: 0 auto 6px; border-radius: 16px; background: var(--teal-l); color: var(--teal); display: grid; place-items: center; }
+.mode.give .flow .ic { background: var(--warn-l); color: var(--warn); }
+.flow .ic svg { width: 28px; height: 28px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.flow .arrow { align-self: flex-start; margin-top: 12px; font-size: 26px; color: var(--muted); line-height: 1; }
+.help { font-size: 15px; }
+.banner { border-radius: var(--r); padding: 16px; margin-bottom: 14px; color: #fff; display: grid; gap: 4px; }
+.banner:empty { display: none; }
+.banner b { font-size: 22px; line-height: 1.2; }
+.banner span { font-size: 15.5px; opacity: .95; }
+.banner.take { background: var(--teal); } .banner.give { background: var(--warn); }
+.banner.wait { background: var(--wait); } .banner.bad { background: var(--bad); }

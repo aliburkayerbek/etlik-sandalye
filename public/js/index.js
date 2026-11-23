@@ -1,4 +1,5 @@
-renderSteps($('#steps'), 1);
+renderFlow($('#flowTake'), STEP_LABELS.take);
+renderFlow($('#flowGive'), STEP_LABELS.give);
 
 // QR içeriği ya tam URL (…/s?id=TS-0001) ya da yalnızca ID olabilir
 function idFromText(text) {
