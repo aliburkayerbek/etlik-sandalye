@@ -43,6 +43,14 @@ document.addEventListener('click', (e) => {
 }, true);
 api = (url, opts = {}) => demoApi(url, opts);
 logout = async () => { await api('/api/auth/logout', { method: 'POST' }); nav('/giris'); };
-const startKey = Object.entries(ROUTES).find(([, k]) => k === location.hash.slice(1));
-nav(startKey ? startKey[0] : '/');
+// Doğrudan giriş bağlantıları (yalnızca demo): #personel-direkt, #admin-direkt
+const DIREKT = { 'personel-direkt': ['kalp.personel', '/personel'], 'admin-direkt': ['admin', '/admin'] };
+const hash = location.hash.slice(1);
+if (DIREKT[hash]) {
+  demoApi('/api/auth/login', { method: 'POST', body: { username: DIREKT[hash][0], password: 'demo1234' } })
+    .then(() => nav(DIREKT[hash][1])).catch(() => nav('/giris'));
+} else {
+  const startKey = Object.entries(ROUTES).find(([, k]) => k === hash);
+  nav(startKey ? startKey[0] : '/');
+}
 window.addEventListener('unhandledrejection', (e) => { if (e.reason && e.reason.status) e.preventDefault(); });
