@@ -189,3 +189,5 @@ body { font-size: 17px; } label.f { font-size: 16.5px; } .flow .fl { font-size: 
 .card.bar { padding-bottom: 12px; } .card.bar > b { display: block; margin-bottom: 8px; }
 .tabs button { min-height: 44px; }
 .tabs button:focus-visible { outline: 3px solid var(--navy); }
+.hero .hint { margin: 14px 0 0; font-size: 16px; }
+.hero h2 { margin-bottom: 12px; }
