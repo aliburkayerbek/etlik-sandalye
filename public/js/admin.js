@@ -1,6 +1,6 @@
 // Admin paneli (tek sayfa, sekmeli).
 let meta, me;
-const PARTS = { tekerlek: 'Tekerlek', sirtlik: 'Sırtlık', koltuk: 'Koltuk', tutamac: 'Tutamaç', diger: 'Diğer' };
+const PARTS = { tekerlek: 'Tekerlek', sirtlik: 'Arka dayanak', koltuk: 'Oturma yeri', tutamac: 'Tutma kolu', diger: 'Başka yer' };
 const view = () => $('#view');
 const hospitalOptions = (sel = '', empty = 'Tüm hastaneler') =>
   `<option value="">${empty}</option>` + meta.hospitals.map((h) => `<option ${h === sel ? 'selected' : ''}>${esc(h)}</option>`).join('');
@@ -45,17 +45,22 @@ async function ozet() {
   });
   const all = Object.values(tot).reduce((a, b) => a + b, 0);
   const order = ['musait', 'onay_bekliyor', 'kullanimda', 'iade_bekliyor', 'arizali'];
+  const sentence = all
+    ? `Şu an <b>${all}</b> sandalye var: <b>${tot.musait || 0}</b> tanesi boşta, <b>${tot.kullanimda || 0}</b> tanesi kullanımda, <b>${(tot.onay_bekliyor || 0) + (tot.iade_bekliyor || 0)}</b> tanesi görevli işlemi bekliyor, <b>${tot.arizali || 0}</b> tanesi bozuk.`
+    : 'Henüz sandalye yok. “Excel Yükle” sekmesinden başlayın.';
   view().innerHTML = `
+    <div class="card sentence"><p>${sentence}</p>
+      <div class="track" role="img" aria-label="Sandalye durumları">${order.map((s) => `<span class="s-${s}" style="width:${all ? ((tot[s] || 0) / all) * 100 : 0}%"></span>`).join('')}</div></div>
     <div class="stats"><div class="stat"><div class="v">${all}</div><div class="l">Toplam sandalye</div></div>
       ${order.map((s) => `<div class="stat ${s}"><div class="v">${tot[s] || 0}</div><div class="l">${STATUS[s]}</div></div>`).join('')}</div>
-    <div class="card"><h2>Hastane bazlı doluluk</h2><div class="bars">
+    <div class="card"><h2>Hastanelere göre durum</h2><div class="bars">
       ${Object.entries(byH).sort((a, b) => b[1].total - a[1].total).map(([h, v]) => `
         <div class="bar"><div class="lb"><span>${esc(h)}</span><span>${v.total} sandalye · %${Math.round(((v.kullanimda || 0) / v.total) * 100)} kullanımda</span></div>
         <div class="track">${order.map((s) => v[s] ? `<span class="s-${s}" title="${STATUS[s]}: ${v[s]}" style="width:${(v[s] / v.total) * 100}%"></span>` : '').join('')}</div></div>`).join('') || '<p class="muted">Henüz sandalye yok. Excel Yükle sekmesinden başlayın.</p>'}
       </div><div class="legend">${order.map((s) => `<span><i class="s-${s}"></i>${STATUS[s]}</span>`).join('')}</div></div>
     <div class="grid2">
-      <div class="card"><h2>En çok arızalanan parça (30 gün)</h2>${bars(parts.rows, 'parca', 'adet', 's-arizali')}</div>
-      <div class="card"><h2>En çok arıza bildirilen sandalyeler (30 gün)</h2>
+      <div class="card"><h2>En çok bozulan yer (son 30 gün)</h2>${bars(parts.rows, 'parca', 'adet', 's-arizali')}</div>
+      <div class="card"><h2>En çok bozukluk bildirilen sandalyeler (son 30 gün)</h2>
         ${bars(chairs.rows.slice(0, 8).map((r) => ({ ...r, l: `${r.id_no} · ${r.mahal}` })), 'l', 'bildirim', 's-arizali')}</div>
     </div>`;
 }
@@ -67,11 +72,11 @@ async function sandalyeler() {
   const p = new URLSearchParams({ ...chairQ, limit: 100 });
   const data = await api('/api/admin/chairs?' + p);
   view().innerHTML = `<div class="card"><div class="toolbar">
-      <input type="search" id="cq" placeholder="ID No / mahal ara" value="${esc(chairQ.q)}">
+      <input type="search" id="cq" placeholder="Numara veya yer ara" aria-label="Sandalye ara" value="${esc(chairQ.q)}">
       <select id="ch">${hospitalOptions(chairQ.hospital)}</select><select id="cs">${statusOptions(chairQ.status)}</select>
       <button class="btn sm" id="cf">Filtrele</button>${me.role === 'admin' ? '<button class="btn sm navy" id="cnew">+ Yeni sandalye</button>' : ''}
       <span class="muted">${data.total} kayıt</span></div>
-    <div class="tablewrap"><table class="t"><tr><th>ID No</th><th>Tanımlı Mahal</th><th>Hastane</th><th>Durum</th><th>Açık arıza</th><th></th></tr>
+    <div class="tablewrap"><table class="t"><tr><th>ID No</th><th>Sandalyenin yeri</th><th>Hastane</th><th>Durum</th><th>Açık bozukluk</th><th></th></tr>
     ${data.rows.map((c) => `<tr class="${c.active ? '' : 'muted'}"><td><b>${esc(c.id_no)}</b>${c.active ? '' : ' (pasif)'}</td><td>${esc(c.mahal)}</td><td>${esc(c.hospital)}</td>
       <td>${badge(c.status)}</td><td>${c.open_faults || ''}</td><td style="white-space:nowrap">
       ${me.role === 'admin' ? `<button class="btn sm ghost" data-edit="${esc(c.id_no)}">Düzenle</button>` : ''}
@@ -96,7 +101,7 @@ async function sandalyeler() {
 function chairDialog(c) {
   dialog(c ? `Sandalye düzenle: ${c.id_no}` : 'Yeni sandalye', `
     <label class="f">ID No</label><input type="text" id="did" value="${esc(c?.id_no || '')}" ${c ? 'disabled' : ''} placeholder="TS-1271">
-    <label class="f">Tanımlı Mahal</label><input type="text" id="dm" value="${esc(c?.mahal || '')}" placeholder="Kalp Damar Hastanesi - Ana Giriş Danışma">
+    <label class="f">Sandalyenin yeri (Tanımlı Mahal)</label><input type="text" id="dm" value="${esc(c?.mahal || '')}" placeholder="Kalp Damar Hastanesi - Ana Giriş Danışma">
     <p class="muted">Biçim: <b>Hastane Adı - Yer</b>. Hastane bilgisi bu metinden otomatik çıkarılır.</p>
     ${c ? `<label style="display:flex;gap:8px;margin-top:10px"><input type="checkbox" id="dact" ${c.active ? 'checked' : ''}> Aktif (pasif sandalyenin QR'ı çalışmaz)</label>` : ''}<div id="dlgMsg"></div>`,
   [{ label: 'Kaydet', onClick: async () => {
@@ -107,9 +112,9 @@ function chairDialog(c) {
 }
 
 function breakDialog(id) {
-  dialog(`${id} → Arızalı / Bakımda`, '<div id="fp"></div><div id="dlgMsg"></div>', [{ label: 'Bakıma al', cls: 'bad', onClick: async () => {
+  dialog(`${id} sandalyesini bakıma al`, '<div id="fp"></div><div id="dlgMsg"></div>', [{ label: 'Bakıma al', cls: 'bad', onClick: async () => {
     const f = picker.value();
-    if (!f || !f.has) throw new Error('Arıza Var seçip parçayı işaretleyin.');
+    if (!f || !f.has) throw new Error('“Evet, bozuk” seçip bozuk yeri işaretleyin.');
     await api(`/api/admin/chairs/${encodeURIComponent(id)}/status`, { method: 'POST', body: { status: 'arizali', fault: f } });
     $('#dlg').close(); sandalyeler();
   } }]);
@@ -120,9 +125,9 @@ function breakDialog(id) {
 function yukle() {
   view().innerHTML = `<div class="card"><h2>Excel ile toplu sandalye yükleme</h2>
     <div class="steps" style="grid-template-columns:repeat(3,1fr)">
-      <div class="step active"><div class="ic">${ICONS.form}</div>1. Şablonu indir ve doldur</div>
-      <div class="step"><div class="ic">${ICONS.qr}</div>2. Yükle ve önizle</div>
-      <div class="step"><div class="ic">${ICONS.done}</div>3. Onayla, kaydet</div></div>
+      <div class="step active"><div class="ic" aria-hidden="true">${ICONS.form}</div>1. Şablonu indirin ve doldurun</div>
+      <div class="step"><div class="ic" aria-hidden="true">${ICONS.qr}</div>2. Yükleyin, önce kontrol edin</div>
+      <div class="step"><div class="ic" aria-hidden="true">${ICONS.done}</div>3. Onaylayın, kaydedilsin</div></div>
     <p>Sütun başlıkları birebir <b>ID No</b> ve <b>Tanımlı Mahal</b> olmalı. Örnek: <code>TS-0001</code> · <code>Kalp Damar Hastanesi - Ana Giriş Danışma</code></p>
     <a class="btn sec" href="/api/admin/chairs/template">⬇ Örnek şablonu indir (.xlsx)</a>
     <div class="toolbar" style="margin-top:16px">
@@ -161,19 +166,19 @@ function yukle() {
 /* ---------- Hareketler ---------- */
 async function hareketler() {
   const rows = await api('/api/admin/movements');
-  view().innerHTML = `<div class="card"><h2>Aktif hareketler (${rows.length})</h2><p class="muted">Onay bekleyen, kullanımdaki ve iade bekleyen tüm kayıtlar. 15 sn'de bir yenilenir.</p>
-    <div class="tablewrap"><table class="t"><tr><th>ID No</th><th>Tanımlı Mahal</th><th>Durum</th><th>Kişi</th><th>Gittiği yer</th><th>Talep</th><th>Onaylayan</th><th></th></tr>
+  view().innerHTML = `<div class="card"><h2>Şu an devam eden işlemler (${rows.length})</h2><p class="muted">Görevli onayı bekleyen, hastada olan ve geri bırakılmayı bekleyen sandalyeler. 15 saniyede bir yenilenir.</p>
+    <div class="tablewrap"><table class="t"><tr><th>ID No</th><th>Sandalyenin yeri</th><th>Durum</th><th>Kişi</th><th>Nereden geldi</th><th>İstek saati</th><th>Onaylayan</th><th></th></tr>
     ${rows.map((r) => `<tr><td><b>${esc(r.chair_id)}</b><br><span class="muted">${esc(r.ref_code)}</span></td><td>${esc(r.mahal)}</td><td>${badge(r.status)}</td>
       <td>${esc(r.full_name)}<br><span class="muted">${esc(r.phone_masked)}</span></td><td>${esc(r.from_hospital)} / ${esc(r.from_department)}</td>
       <td>${fmt(r.requested_at)}<br><span class="muted">${ago(r.requested_at)}</span></td><td>${esc(r.approved_by_name || '-')}</td>
-      <td>${me.role === 'admin' ? `<button class="btn sm ghost" data-cancel="${r.id}">Müdahale</button>` : ''}</td></tr>`).join('')}</table></div></div>`;
+      <td>${me.role === 'admin' ? `<button class="btn sm ghost" data-cancel="${r.id}">Elle kapat</button>` : ''}</td></tr>`).join('')}</table></div></div>`;
   view().onclick = (e) => {
     const id = e.target.dataset.cancel;
     if (!id) return;
-    dialog('Manuel müdahale: kaydı kapat', `<p>Kayıt iptal edilir ve sandalye seçtiğiniz statüye alınır.</p>
-      <select id="cst"><option value="musait">Sandalye elimizde ve sağlam → Müsait</option><option value="arizali">Sandalye arızalı / kayıp → Arızalı</option></select>
+    dialog('İşlemi elle kapat', `<p>İşlem iptal edilir ve sandalye seçtiğiniz duruma alınır.</p>
+      <select id="cst"><option value="musait">Sandalye elimizde ve sağlam → Boş</option><option value="arizali">Sandalye bozuk ya da kayıp → Bozuk</option></select>
       <label class="f">Not</label><input type="text" id="cnote" placeholder="Örn: Hasta taburcu oldu, sandalye serviste bulundu"><div id="dlgMsg"></div>`,
-    [{ label: 'Kaydı kapat', cls: 'bad', onClick: async () => {
+    [{ label: 'İşlemi kapat', cls: 'bad', onClick: async () => {
       await api(`/api/admin/movements/${id}/cancel`, { method: 'POST', body: { chairStatus: $('#cst').value, note: $('#cnote').value } });
       $('#dlg').close(); hareketler();
     } }]);
@@ -184,13 +189,13 @@ async function hareketler() {
 let faultOpen = true;
 async function arizalar() {
   const rows = await api('/api/admin/faults?open=' + (faultOpen ? 1 : 0));
-  const stage = { teslim_alma: 'Teslim almada', iade: 'İadede', personel: 'Personel', admin: 'Admin' };
-  view().innerHTML = `<div class="card"><div class="toolbar"><h2 style="margin:0">Arıza bildirimleri</h2>
+  const stage = { teslim_alma: 'Alırken', iade: 'Geri bırakırken', personel: 'Personel', admin: 'Admin' };
+  view().innerHTML = `<div class="card"><div class="toolbar"><h2 style="margin:0">Bozukluk bildirimleri</h2>
       <label><input type="checkbox" id="fo" ${faultOpen ? 'checked' : ''}> Yalnızca açık olanlar</label></div>
-    <div class="tablewrap"><table class="t"><tr><th>Tarih</th><th>ID No</th><th>Tanımlı Mahal</th><th>Aşama</th><th>Parçalar</th><th>Not</th><th>Sandalye</th><th></th></tr>
+    <div class="tablewrap"><table class="t"><tr><th>Tarih</th><th>ID No</th><th>Sandalyenin yeri</th><th>Ne zaman</th><th>Bozuk yer</th><th>Not</th><th>Sandalye</th><th></th></tr>
     ${rows.map((f) => `<tr><td>${fmt(f.created_at)}</td><td><b>${esc(f.chair_id)}</b></td><td>${esc(f.mahal)}</td><td>${stage[f.stage]}</td>
       <td>${f.parts.map((p) => PARTS[p]).join(', ')}</td><td>${esc(f.note || '')}</td><td>${badge(f.chair_status)}</td>
-      <td>${f.resolved_at ? '<span class="muted">Kapandı</span>' : `<button class="btn sm ok" data-res="${f.id}">Giderildi</button>
+      <td>${f.resolved_at ? '<span class="muted">Kapandı</span>' : `<button class="btn sm ok" data-res="${f.id}">Düzeltildi</button>
         ${f.chair_status === 'musait' ? `<button class="btn sm bad" data-brk="${esc(f.chair_id)}">Bakıma al</button>` : ''}`}</td></tr>`).join('') || '<tr><td colspan="8" class="muted">Kayıt yok.</td></tr>'}</table></div></div>`;
   $('#fo').onchange = (e) => { faultOpen = e.target.checked; arizalar(); };
   view().onclick = async (e) => {
@@ -201,8 +206,8 @@ async function arizalar() {
 
 /* ---------- Raporlar ---------- */
 const REPORT_LIST = {
-  personel: 'Personel işlem sayıları (saat aralığı)', durum: 'Anlık sandalye durumu', ariza_parca: 'Arıza: parça bazında',
-  ariza_sandalye: 'Arıza: sandalye bazında', kullanim: 'Kullanım yoğunluğu',
+  personel: 'Personel işlem sayıları (saat aralığı)', durum: 'Anlık sandalye durumu', ariza_parca: 'Bozukluk: hangi yer çok bozuluyor',
+  ariza_sandalye: 'Bozukluk: hangi sandalye çok bozuluyor', kullanim: 'Kullanım yoğunluğu',
 };
 let rq = { key: 'personel', from: daysAgo(7), to: daysAgo(0), by: 'hastane', hospital: '', status: '' };
 async function raporlar() {
@@ -220,7 +225,7 @@ async function raporlar() {
   view().innerHTML = `<div class="card"><div class="toolbar">
       <select id="rk">${Object.entries(REPORT_LIST).map(([k, v]) => `<option value="${k}" ${k === rq.key ? 'selected' : ''}>${v}</option>`).join('')}</select>
       ${rq.key !== 'durum' ? `<label>Başlangıç<br><input type="date" id="rf" value="${rq.from}"></label><label>Bitiş<br><input type="date" id="rt" value="${rq.to}"></label>` : ''}
-      ${rq.key === 'kullanim' ? `<select id="rb"><option value="hastane">Hastane bazlı</option><option value="mahal">Tanımlı Mahal bazlı</option><option value="bolum">Gidilen bölüm bazlı</option></select>` : ''}
+      ${rq.key === 'kullanim' ? `<select id="rb"><option value="hastane">Hastaneye göre</option><option value="mahal">Sandalyenin yerine göre</option><option value="bolum">Bölüme göre</option></select>` : ''}
       ${rq.key === 'durum' ? `<select id="rh">${hospitalOptions(rq.hospital)}</select><select id="rs">${statusOptions(rq.status)}</select>` : ''}
       <button class="btn sm" id="rgo">Göster</button>
       <a class="btn sm sec" href="/api/admin/reports/${rq.key}?${p}&format=xlsx">⬇ Excel</a><a class="btn sm ghost" href="/api/admin/reports/${rq.key}?${p}&format=csv">⬇ CSV</a></div>
@@ -273,7 +278,7 @@ const VIEWS = { ozet, sandalyeler, yukle, hareketler, arizalar, raporlar, kullan
 let current = 'ozet';
 async function show(name) {
   current = name;
-  $$('#tabs button').forEach((b) => b.classList.toggle('on', b.dataset.tab === name));
+  $$('#tabs button').forEach((b) => { b.classList.toggle('on', b.dataset.tab === name); b.setAttribute('aria-selected', b.dataset.tab === name); });
   view().onclick = null;
   try { await VIEWS[name](); } catch (e) { if (view()) view().innerHTML = `<div class="alert err">${esc(e.message)}</div>`; }
 }

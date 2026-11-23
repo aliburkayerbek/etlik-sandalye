@@ -191,3 +191,9 @@ body { font-size: 17px; } label.f { font-size: 16.5px; } .flow .fl { font-size: 
 .tabs button:focus-visible { outline: 3px solid var(--navy); }
 .hero .hint { margin: 14px 0 0; font-size: 16px; }
 .hero h2 { margin-bottom: 12px; }
+
+/* Admin */
+.card.sentence p { margin: 0 0 10px; font-size: 18px; }
+.card.sentence .track { display: flex; height: 22px; border-radius: 8px; overflow: hidden; background: var(--bg); }
+.card.sentence .track span { display: block; height: 100%; }
+dialog h2.dh { font-size: 17px; margin: 0; }
