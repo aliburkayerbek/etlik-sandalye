@@ -1,0 +1,20 @@
+/* A4: 3 sütun x 7 satır = 21 etiket (70 x 42 mm) */
+#sheet { padding: 10px; }
+.page { width: 210mm; height: 297mm; padding: 4.5mm 0; margin: 0 auto 10px; background: #fff; display: grid;
+  grid-template-columns: repeat(3, 70mm); grid-template-rows: repeat(7, 41.2mm); box-shadow: 0 1px 4px rgba(0,0,0,.15); }
+.label { display: flex; gap: 2mm; align-items: center; padding: 2mm 3mm; border: 0.2mm dashed #ccc; overflow: hidden; }
+.label .qr { width: 32mm; height: 32mm; flex: none; }
+.label .qr svg { width: 100%; height: 100%; }
+.label .txt { min-width: 0; }
+.label .org { font-size: 6.5pt; font-weight: 700; color: #12355b; letter-spacing: .3pt; }
+.label .id { font-size: 15pt; font-weight: 800; line-height: 1.1; margin: .6mm 0; }
+.label .mahal { font-size: 7pt; line-height: 1.2; max-height: 3.6em; overflow: hidden; }
+.label .hint { font-size: 5.8pt; color: #555; margin-top: 1mm; }
+@media print {
+  @page { size: A4; margin: 0; }
+  body { background: #fff; }
+  .noprint { display: none; }
+  #sheet { padding: 0; }
+  .page { margin: 0; box-shadow: none; page-break-after: always; }
+  .label { border-color: transparent; }
+}

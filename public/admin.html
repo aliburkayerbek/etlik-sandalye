@@ -1,0 +1,12 @@
+<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="/css/style.css"><title>Admin | Etlik Şehir Hastanesi</title></head><body>
+<header class="top"><div class="logo"><img src="/img/logo.svg" width="26" height="26" alt=""></div><h1>Etlik Şehir Hastanesi<small>Tekerlekli Sandalye Emanet Sistemi</small></h1><div class="right"><span id="who"></span><a href="/personel" style="color:#fff">Personel Ekranı</a><button class="btn sm sec" id="logout">Çıkış</button></div></header>
+<main class="wide">
+  <div class="tabs" id="tabs">
+    <button data-tab="ozet" class="on">Özet</button><button data-tab="sandalyeler">Sandalyeler</button><button data-tab="yukle">Excel Yükle</button>
+    <button data-tab="hareketler">Hareketler</button><button data-tab="arizalar">Arızalar</button><button data-tab="raporlar">Raporlar</button>
+    <button data-tab="kullanicilar">Kullanıcılar</button><a class="btn sm ghost" href="/etiket" target="_blank">QR Etiket Yazdır ↗</a>
+  </div>
+  <div id="view"></div>
+</main>
+<dialog id="dlg"><div class="dh" id="dlgTitle"></div><div class="db" id="dlgBody"></div><div class="df" id="dlgFoot"></div></dialog>
+<script src="/js/common.js"></script><script src="/js/fault-picker.js"></script><script src="/js/admin.js"></script></body></html>

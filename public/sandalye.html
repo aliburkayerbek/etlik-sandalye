@@ -1,0 +1,41 @@
+<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="/css/style.css"><title>Sandalye | Etlik Şehir Hastanesi</title></head><body>
+<header class="top"><div class="logo"><img src="/img/logo.svg" width="26" height="26" alt=""></div><h1>Etlik Şehir Hastanesi<small>Tekerlekli Sandalye Emanet Sistemi</small></h1></header>
+<main>
+  <div class="steps" id="steps"></div>
+  <div class="card" id="chairCard"><p class="muted">Sandalye bilgisi yükleniyor…</p></div>
+  <div id="msg"></div>
+
+  <form class="card hidden" id="borrowForm" novalidate>
+    <h2>Sandalyeyi Teslim Al</h2>
+    <label class="f" for="fullName">Ad Soyad *</label><input type="text" id="fullName" autocomplete="name" required>
+    <div class="row2">
+      <div><label class="f" for="tc">T.C. Kimlik No *</label><input type="tel" id="tc" inputmode="numeric" maxlength="11" required></div>
+      <div><label class="f" for="phone">Telefon Numarası *</label><input type="tel" id="phone" inputmode="tel" placeholder="05XX XXX XX XX" autocomplete="tel" required></div>
+    </div>
+    <label class="f" for="fromHospital">Geldiği Hastane *</label><select id="fromHospital" required></select>
+    <label class="f" for="fromDepartment">Geldiği Bölüm / Poliklinik / Servis *</label><input type="text" id="fromDepartment" placeholder="Örn: Kardiyoloji Polikliniği" required>
+    <div id="faultBorrow"></div>
+    <div class="kvkk">
+      <p style="margin:0 0 8px">Kişisel verileriniz yalnızca sandalye emanet takibi için işlenir. <a href="#" data-kvkk>KVKK Aydınlatma Metni'ni okuyun</a>.</p>
+      <label class="chk"><input type="checkbox" id="kvkkOk" required>KVKK Aydınlatma Metni'ni okudum, anladım ve onaylıyorum. *</label>
+    </div>
+    <div id="formMsg"></div>
+    <button class="btn lg block" style="margin-top:14px" id="borrowBtn" disabled>Talebi Gönder</button>
+    <p class="muted" style="text-align:center">Gönderdikten sonra görevli personel onaylayacaktır.</p>
+  </form>
+
+  <form class="card hidden" id="returnForm" novalidate>
+    <h2>Sandalyeyi Teslim Et (İade)</h2>
+    <div id="faultReturn"></div>
+    <label class="f" for="returnNote">Teslim notu (isteğe bağlı)</label>
+    <textarea id="returnNote" maxlength="500" placeholder="Örn: Kalp Damar Ana Giriş danışmasına bıraktım"></textarea>
+    <div id="returnMsg"></div>
+    <button class="btn lg block" style="margin-top:14px">İade Talebini Gönder</button>
+  </form>
+
+  <div class="card hidden" id="done"></div>
+</main>
+<dialog id="kvkkDlg"><div class="dh">KVKK Aydınlatma Metni</div><div class="db" id="kvkkBody">Yükleniyor…</div>
+  <div class="df"><button class="btn ghost" data-close>Kapat</button><button class="btn" id="kvkkAccept">Okudum, Onaylıyorum</button></div></dialog>
+<script src="/js/common.js"></script><script src="/js/fault-picker.js"></script><script src="/js/sandalye.js"></script>
+</body></html>

@@ -1,0 +1,9 @@
+<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="/css/style.css"><title>Personel Ekranı | Etlik Şehir Hastanesi</title></head><body>
+<header class="top"><div class="logo"><img src="/img/logo.svg" width="26" height="26" alt=""></div><h1>Etlik Şehir Hastanesi<small>Tekerlekli Sandalye Emanet Sistemi</small></h1><div class="right"><span id="who"></span><a href="/admin" id="adminLink" class="hidden" style="color:#fff">Admin</a><button class="btn sm sec" id="logout">Çıkış</button></div></header>
+<main class="wide">
+  <div class="stats" id="stats"></div>
+  <div class="tabs"><button data-tab="queue" class="on">Onay Bekleyenler <span id="qn"></span></button><button data-tab="active">Kullanımdakiler <span id="an"></span></button></div>
+  <div class="card"><div class="toolbar"><input type="search" id="filter" placeholder="ID No veya ad ile filtrele"><span class="muted" id="refreshed"></span></div>
+    <div id="list"></div></div>
+</main>
+<script src="/js/common.js"></script><script src="/js/personel.js"></script></body></html>

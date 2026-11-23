@@ -1,0 +1,20 @@
+<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="/css/style.css"><title>Tekerlekli Sandalye | Etlik Şehir Hastanesi</title></head><body>
+<header class="top"><div class="logo"><img src="/img/logo.svg" width="26" height="26" alt=""></div><h1>Etlik Şehir Hastanesi<small>Tekerlekli Sandalye Emanet Sistemi</small></h1><div class="right"><a href="/giris" style="color:#fff">Personel Girişi</a></div></header>
+<main>
+  <div class="steps" id="steps"></div>
+  <div class="card">
+    <h2>Sandalyenin QR kodunu okutun</h2>
+    <p class="muted">Sandalyenin üzerindeki QR kodu telefonunuzun kamerasıyla okutabilir veya aşağıdaki butona basabilirsiniz.</p>
+    <button class="btn lg block" id="scanBtn">📷 QR Kodu Okut</button>
+    <div id="reader" class="hidden" style="margin-top:12px"></div>
+    <div id="msg"></div>
+    <label class="f" for="manual">veya sandalye numarasını yazın</label>
+    <div style="display:flex;gap:8px"><input type="text" id="manual" placeholder="TS-0001" autocapitalize="characters"><button class="btn navy" id="goBtn">Git</button></div>
+  </div>
+  <div class="card"><h2>Nasıl çalışır?</h2>
+    <dl class="kv"><dt>Almak için</dt><dd>QR okutun, formu ve arıza kontrolünü doldurun, KVKK metnini onaylayın. Görevli onaylayınca sandalye sizindir.</dd>
+    <dt>Bırakmak için</dt><dd>Aynı QR kodu tekrar okutun, “Sandalyeyi Teslim Et” adımını doldurun ve sandalyeyi görevliye bırakın.</dd></dl>
+  </div>
+</main>
+<script src="/vendor/html5-qrcode.min.js"></script><script src="/js/common.js"></script><script src="/js/index.js"></script>
+</body></html>
