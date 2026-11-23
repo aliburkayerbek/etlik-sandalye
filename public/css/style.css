@@ -178,3 +178,14 @@ ol.flow { list-style: none; padding: 0; margin: 0 0 10px; }
 .stop { background: var(--bad-l); color: #8f2a1f; border: 2px solid var(--bad); border-radius: 12px; padding: 12px; font-size: 18px; font-weight: 800; margin-top: 12px; text-align: left; }
 body { font-size: 17px; } label.f { font-size: 16.5px; } .flow .fl { font-size: 15px; }
 .linklike:focus-visible { outline: 3px solid var(--navy); }
+
+/* Personel ekranı */
+.kind { font-weight: 800; font-size: 15px; letter-spacing: .3px; padding: 6px 10px; border-radius: 8px; justify-self: start; }
+.kind span { font-size: 20px; vertical-align: -2px; }
+.k-bor { background: var(--teal-l); color: var(--teal); } .k-ret { background: var(--warn-l); color: var(--warn); }
+.qitem .what { margin: 0; font-size: 16px; }
+.qitem .acts .btn { min-height: 52px; font-size: 17px; }
+.qitem .acts label { font-size: 15px; }
+.card.bar { padding-bottom: 12px; } .card.bar > b { display: block; margin-bottom: 8px; }
+.tabs button { min-height: 44px; }
+.tabs button:focus-visible { outline: 3px solid var(--navy); }
